@@ -128,6 +128,13 @@ namespace Planeta_Online.Controllers
         {
             if (id != null)
             {
+                foreach(EventRegistration registration in db.EventRegistrations)
+                {
+                    if(registration.EventId == id && registration.UserId.Equals(User.Identity.GetUserId()))
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
                 db.EventRegistrations.Add(new EventRegistration() { UserId = User.Identity.GetUserId(), EventId = (int)id });
                 db.SaveChanges();
                 return RedirectToAction("Index");
