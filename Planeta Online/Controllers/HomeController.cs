@@ -26,5 +26,9 @@ namespace Planeta_Online.Controllers
 
             return View();
         }
+        public ActionResult Events()
+        {
+            return RedirectToAction("Index", "Events");
+        }
     }
 }

@@ -11,7 +11,6 @@ using Planeta_Online.Models;
 
 namespace Planeta_Online.Controllers
 {
-    [Authorize]
     public class EventsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -36,7 +35,7 @@ namespace Planeta_Online.Controllers
             }
             return View(@event);
         }
-
+        [Authorize]
         // GET: Events/Create
         public ActionResult Create()
         {
@@ -58,7 +57,7 @@ namespace Planeta_Online.Controllers
             }
             return View(@event);
         }
-
+        [Authorize]
         // GET: Events/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -89,7 +88,7 @@ namespace Planeta_Online.Controllers
             }
             return View(@event);
         }
-
+        [Authorize]
         // GET: Events/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -116,21 +115,14 @@ namespace Planeta_Online.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        [Authorize]
         public ActionResult Register(int? id)
         {
             if (id != null)
             {
-                foreach(EventRegistration registration in db.EventRegistrations)
+                foreach (EventRegistration registration in db.EventRegistrations)
                 {
-                    if(registration.EventId == id && registration.UserId.Equals(User.Identity.GetUserId()))
+                    if (registration.EventId == id && registration.UserId.Equals(User.Identity.GetUserId()))
                     {
                         return RedirectToAction("Index");
                     }
@@ -141,5 +133,15 @@ namespace Planeta_Online.Controllers
             }
             else return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+        
     }
 }
