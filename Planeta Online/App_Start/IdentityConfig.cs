@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Planeta_Online.Models;
+using System.Web.Helpers;
 
 namespace Planeta_Online
 {
@@ -18,7 +19,8 @@ namespace Planeta_Online
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
+            // This code should actually go into the _AppStart.cshtml file.
+            
             return Task.FromResult(0);
         }
     }
