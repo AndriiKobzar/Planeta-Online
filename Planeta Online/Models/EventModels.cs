@@ -15,8 +15,6 @@ namespace Planeta_Online.Models
         [DataType(DataType.MultilineText)]
         [Display(Name = "Опис")]
         public string Description { get; set; }
-        [Display(Name = "Доповідач")]
-        public string Lecturer { get; set; }
         public List<ApplicationUser> Listeners { get; set; }
         [Display(Name = "Дата та час")]
         public DateTime Time { get; set; }
@@ -50,5 +48,24 @@ namespace Planeta_Online.Models
         public string VisitorEmail { get; set; }
         public int EventId { get; set; }
         public string EventName { get; set; }
+    }
+    public class EventApplication
+    {
+        public int Id { get; set; }
+        public int MyProperty { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        [DataType(DataType.MultilineText)]
+        public string Description { get; set; }
+        [Required]
+        public DateTime Time { get; set; }
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        public string CreatorEmail { get; set; }
+        [Required]
+        public string CreatorName { get; set; }
+
+        public string Attachments { get; set; }
     }
 }

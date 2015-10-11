@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>Сторінка адміністратора</h2>
+<h3>Доступні дії:</h3>
+<div class="form-group">
+    <div class="col-md-12">
+        <input class="btn btn-default" type="button" title="Додати книгу" value="Додати книгу" onclick="location.href='@Url.Action("CreateBook", "Administrator")'" />
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-12">
+        <input type="button" value="Зареєстровані події" class="btn btn-default" onclick="location.href='@Url.Action("SubmittedEvents", "Administrator")'" />
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-12">
+        <input type="submit" value="Create" class="btn btn-default" />
+    </div>
+</div>

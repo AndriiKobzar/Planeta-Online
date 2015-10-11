@@ -1,4 +1,4 @@
-﻿@model Planeta_Online.Models.Event
+﻿@model Planeta_Online.Models.EventApplication
 
 @{
     ViewBag.Title = "Create";
@@ -13,7 +13,7 @@
     
     <div class="form-horizontal">
         <h4>Event</h4>
-        <hr />
+        <!--Event Name-->
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -22,7 +22,7 @@
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <!--Event description-->
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -30,16 +30,24 @@
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <!--Organiser-->
         <div class="form-group">
-            @Html.LabelFor(model => model.Lecturer, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CreatorName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Lecturer, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Lecturer, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.CreatorName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreatorName, "", new { @class = "text-danger" })
                 
             </div>
         </div>
-
+        <!--Organiser Email-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatorEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreatorEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreatorEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <!--Date-->
         <div class="form-group">
             @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -47,6 +55,7 @@
                 @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
             </div>
         </div>
+        
         @using (Html.BeginForm("Upload", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <input type="file" name="FileUpload" class=" btn btn-default" />

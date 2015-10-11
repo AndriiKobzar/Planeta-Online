@@ -177,6 +177,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -194,6 +195,18 @@
     <Compile Include="Migrations\201510110858160_EventRegistration.cs" />
     <Compile Include="Migrations\201510110858160_EventRegistration.Designer.cs">
       <DependentUpon>201510110858160_EventRegistration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510111815344_EventApplication.cs" />
+    <Compile Include="Migrations\201510111815344_EventApplication.Designer.cs">
+      <DependentUpon>201510111815344_EventApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510111849092_AddAttachmnts.cs" />
+    <Compile Include="Migrations\201510111849092_AddAttachmnts.Designer.cs">
+      <DependentUpon>201510111849092_AddAttachmnts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510111933297_RemoveLecturer.cs" />
+    <Compile Include="Migrations\201510111933297_RemoveLecturer.Designer.cs">
+      <DependentUpon>201510111933297_RemoveLecturer.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -259,7 +272,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Books\Create.cshtml" />
+    <Content Include="Views\Administrator\CreateBook.cshtml" />
     <Content Include="Views\Books\Delete.cshtml" />
     <Content Include="Views\Books\Details.cshtml" />
     <Content Include="Views\Books\Edit.cshtml" />
@@ -269,6 +282,8 @@
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Success.cshtml" />
+    <Content Include="Views\Administrator\Index.cshtml" />
+    <Content Include="Views\Administrator\SubmittedEvents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -289,6 +304,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510110858160_EventRegistration.resx">
       <DependentUpon>201510110858160_EventRegistration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510111815344_EventApplication.resx">
+      <DependentUpon>201510111815344_EventApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510111849092_AddAttachmnts.resx">
+      <DependentUpon>201510111849092_AddAttachmnts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510111933297_RemoveLecturer.resx">
+      <DependentUpon>201510111933297_RemoveLecturer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -41,7 +41,7 @@ namespace Planeta_Online.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         
-        public ActionResult Create(Event @event)
+        public ActionResult Create(EventApplication @event)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace Planeta_Online.Controllers
                         file.SaveAs(path);
                     }
                 }
-                db.Events.Add(@event);
+                db.EventApplications.Add(@event);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
