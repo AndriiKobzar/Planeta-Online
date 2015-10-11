@@ -6,132 +6,117 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 using Planeta_Online.Models;
 
 namespace Planeta_Online.Controllers
 {
-    public class EventsController : Controller
+    public class BooksController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Events
+        // GET: Books
         public ActionResult Index()
         {
-            return View(db.Events.ToList());
+            return View(db.Books.ToList());
         }
 
-        // GET: Events/Details/5
+        // GET: Books/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
-            if (@event == null)
+            Book book = db.Books.Find(id);
+            if (book == null)
             {
                 return HttpNotFound();
             }
-            return View(@event);
+            return View(book);
         }
-        [Authorize]
-        // GET: Events/Create
+        [Authorize(Roles="SuperAdmin")]
+        // GET: Books/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Events/Create
+        // POST: Books/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EventViewModel @event)
+        [Authorize(Roles = "SuperAdmin")]
+        public ActionResult Create([Bind(Include = "Id,Title,Author,Genre")] Book book)
         {
             if (ModelState.IsValid)
             {
-                db.Events.Add(new Event() { Lecturer = @event.Lecturer, Name = @event.Name, Time = @event.Time, Description = @event.Description });
+                db.Books.Add(book);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(@event);
+
+            return View(book);
         }
-        [Authorize]
-        // GET: Events/Edit/5
+        [Authorize(Roles = "SuperAdmin")]
+        // GET: Books/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
-            if (@event == null)
+            Book book = db.Books.Find(id);
+            if (book == null)
             {
                 return HttpNotFound();
             }
-            return View(@event);
+            return View(book);
         }
 
-        // POST: Events/Edit/5
+        // POST: Books/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Lecturer,Time")] Event @event)
+        [Authorize(Roles = "SuperAdmin")]
+        public ActionResult Edit([Bind(Include = "Id,Title,Author,Genre")] Book book)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(@event).State = EntityState.Modified;
+                db.Entry(book).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(@event);
+            return View(book);
         }
-        [Authorize]
-        // GET: Events/Delete/5
+
+        // GET: Books/Delete/5
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
-            if (@event == null)
+            Book book = db.Books.Find(id);
+            if (book == null)
             {
                 return HttpNotFound();
             }
-            return View(@event);
+            return View(book);
         }
 
-        // POST: Events/Delete/5
+        // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Event @event = db.Events.Find(id);
-            db.Events.Remove(@event);
+            Book book = db.Books.Find(id);
+            db.Books.Remove(book);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        [Authorize]
-        public ActionResult Register(int? id)
-        {
-            if (id != null)
-            {
-                foreach (EventRegistration registration in db.EventRegistrations)
-                {
-                    if (registration.EventId == id && registration.UserId.Equals(User.Identity.GetUserId()))
-                    {
-                        return RedirectToAction("Index");
-                    }
-                }
-                db.EventRegistrations.Add(new EventRegistration() { UserId = User.Identity.GetUserId(), EventId = (int)id });
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            else return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         protected override void Dispose(bool disposing)
@@ -142,6 +127,5 @@ namespace Planeta_Online.Controllers
             }
             base.Dispose(disposing);
         }
-        
     }
 }

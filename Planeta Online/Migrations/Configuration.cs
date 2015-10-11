@@ -10,7 +10,6 @@ namespace Planeta_Online.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Planeta_Online.Models.ApplicationDbContext";
         }
 
         protected override void Seed(Planeta_Online.Models.ApplicationDbContext context)

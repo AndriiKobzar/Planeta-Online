@@ -7,13 +7,13 @@ namespace Planeta_Online.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class RepairMigration : IMigrationMetadata
+    public sealed partial class EventRegistration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RepairMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(EventRegistration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201509271124206_RepairMigration"; }
+            get { return "201510110858160_EventRegistration"; }
         }
         
         string IMigrationMetadata.Source

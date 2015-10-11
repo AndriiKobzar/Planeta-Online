@@ -10,13 +10,17 @@ namespace Planeta_Online.Models
     public class Event
     {      
         public int Id { get; set; }
+        [Display(Name="Назва")]
         public string Name { get; set; }
-
         [DataType(DataType.MultilineText)]
+        [Display(Name = "Опис")]
         public string Description { get; set; }
+        [Display(Name = "Доповідач")]
         public string Lecturer { get; set; }
         public List<ApplicationUser> Listeners { get; set; }
+        [Display(Name = "Дата та час")]
         public DateTime Time { get; set; }
+        public string Attachments { get; set; }
     }
 
     public class EventViewModel
@@ -34,6 +38,17 @@ namespace Planeta_Online.Models
     {
         public int Id { get; set; }
         public virtual int EventId { get; set; }
-        public virtual string UserId { get; set; }
+        public string VisitorName { get; set; }
+        public string VisitorEmail { get; set; }
+    }
+    public class EventRegistrationViewModel
+    {
+        [Required]
+        public string VisitorName { get; set; }
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        public string VisitorEmail { get; set; }
+        public int EventId { get; set; }
+        public string EventName { get; set; }
     }
 }

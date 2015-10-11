@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Planeta_Online.Models
 {
-    public class BookModel
+    public class Book
     {
         public int Id { get; set; }
         public String Title { get; set; }

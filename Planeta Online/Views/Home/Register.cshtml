@@ -1,0 +1,35 @@
+﻿@model Planeta_Online.Models.EventRegistrationViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Зареєструватись на @Html.DisplayFor(m=>m.EventName)</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-group">
+    @Html.LabelFor(model => model.VisitorName, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.VisitorName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.VisitorName, "", new { @class = "text-danger" })
+    </div>
+</div>
+    
+<div class="form-group">
+    @Html.LabelFor(model => model.VisitorEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.VisitorEmail, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.VisitorEmail, "", new { @class = "text-danger" })
+    </div>
+</div>
+    
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Register" class="btn btn-default" />
+    </div>
+</div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
