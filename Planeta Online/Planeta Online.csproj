@@ -218,6 +218,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-Planeta Online-20150926112527.mdf" />
+    <Content Include="App_Data\aspnet-Planeta Online-20150926112527_log.ldf">
+      <DependentUpon>aspnet-Planeta Online-20150926112527.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -292,9 +296,7 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201510041922153_Initial.resx">
       <DependentUpon>201510041922153_Initial.cs</DependentUpon>

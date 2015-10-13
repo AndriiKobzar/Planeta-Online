@@ -58,15 +58,18 @@
         
         @using (Html.BeginForm("Upload", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-            <input type="file" name="FileUpload" class=" btn btn-default" />
+            <div class="form-group">
+                <input type="file" value="Прикріпити файл" name="FileUpload" class="btn btn-default" />
+            </div>
         }
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
-        
-    </div>
+
+        </div>
 }
 
 <div>
