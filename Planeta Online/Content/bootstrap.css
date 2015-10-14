@@ -180,6 +180,7 @@ select {
 button,
 html input[type="button"],
 input[type="reset"],
+input[type="file"],
 input[type="submit"] {
   cursor: pointer;
   -webkit-appearance: button;
@@ -2009,7 +2010,7 @@ textarea.input-lg {
   vertical-align: middle;
   cursor: pointer;
   border: 1px solid transparent;
-  border-radius: 4px;
+   border-radius: 0px;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -2049,9 +2050,9 @@ fieldset[disabled] .btn {
 }
 
 .btn-default {
-  color: #333333;
-  background-color: #ffffff;
-  border-color: #cccccc;
+  color: #ffffff;
+  background-color: #4B0B5B;
+  border-color: #4B0B5B;
 }
 
 .btn-default:hover,
@@ -2059,9 +2060,9 @@ fieldset[disabled] .btn {
 .btn-default:active,
 .btn-default.active,
 .open .dropdown-toggle.btn-default {
-  color: #333333;
-  background-color: #ebebeb;
-  border-color: #adadad;
+  color: #ffffff;
+  background-color: #32043D;
+  border-color: #32043D;
 }
 
 .btn-default:active,
@@ -4501,12 +4502,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  background-color: #222222;
+  background-color: #0D3006;
   border-color: #080808;
 }
 
 .navbar-inverse .navbar-brand {
-  color: #999999;
+  color: #ffffff;
 }
 
 .navbar-inverse .navbar-brand:hover,
@@ -4520,7 +4521,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse .navbar-nav > li > a {
-  color: #999999;
+  color: #cccccc;
 }
 
 .navbar-inverse .navbar-nav > li > a:hover,
@@ -4533,7 +4534,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
   color: #ffffff;
-  background-color: #080808;
+  background-color: #4B0B5B;
 }
 
 .navbar-inverse .navbar-nav > .disabled > a,
@@ -4565,7 +4566,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-inverse .navbar-nav > .open > a:hover,
 .navbar-inverse .navbar-nav > .open > a:focus {
   color: #ffffff;
-  background-color: #080808;
+  background-color: transparent;
 }
 
 .navbar-inverse .navbar-nav > .dropdown > a:hover .caret {

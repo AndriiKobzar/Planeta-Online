@@ -17,6 +17,8 @@ namespace Planeta_Online.Models
         public string Description { get; set; }
         public List<ApplicationUser> Listeners { get; set; }
         [Display(Name = "Дата та час")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.DateTime)]
         public DateTime Time { get; set; }
         public string Attachments { get; set; }
     }
