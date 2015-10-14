@@ -47,31 +47,38 @@ namespace Planeta_Online.Models
         [Required]
         [Display(Name = "Ім'я та прізвище")]
         public string VisitorName { get; set; }
+
         [Required]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string VisitorEmail { get; set; }
+
         public int EventId { get; set; }
         public string EventName { get; set; }
     }
     public class EventApplication
     {
         public int Id { get; set; }
+
         [Required]
         [Display(Name = "Назва заходу")]
         public string Name { get; set; }
+
         [Required]
         [DataType(DataType.MultilineText)]
         [Display(Name = "Опис")]
         public string Description { get; set; }
+
         [Required]
         [Display(Name = "Дата")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Time { get; set; }
+
         [Required]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string CreatorEmail { get; set; }
+
         [Required]
         [Display(Name = "Ім'я та прізвище")]
         public string CreatorName { get; set; }

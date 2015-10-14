@@ -208,6 +208,10 @@
     <Compile Include="Migrations\201510111933297_RemoveLecturer.Designer.cs">
       <DependentUpon>201510111933297_RemoveLecturer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510141045279_Renaming.cs" />
+    <Compile Include="Migrations\201510141045279_Renaming.Designer.cs">
+      <DependentUpon>201510141045279_Renaming.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BookModels.cs" />
@@ -315,6 +319,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510111933297_RemoveLecturer.resx">
       <DependentUpon>201510111933297_RemoveLecturer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510141045279_Renaming.resx">
+      <DependentUpon>201510141045279_Renaming.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
