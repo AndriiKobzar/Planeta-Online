@@ -26,6 +26,7 @@ namespace Planeta_Online.Models
     public class EventViewModel
     {
         [Required]
+        [Display(Name = "Назва")]
         public string Name { get; set; }
         public string Lecturer { get; set; }
         [Required]
@@ -44,9 +45,11 @@ namespace Planeta_Online.Models
     public class EventRegistrationViewModel
     {
         [Required]
+        [Display(Name = "Ім'я та прізвище")]
         public string VisitorName { get; set; }
         [Required]
         [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email")]
         public string VisitorEmail { get; set; }
         public int EventId { get; set; }
         public string EventName { get; set; }
@@ -54,18 +57,23 @@ namespace Planeta_Online.Models
     public class EventApplication
     {
         public int Id { get; set; }
-        public int MyProperty { get; set; }
         [Required]
+        [Display(Name = "Назва заходу")]
         public string Name { get; set; }
         [Required]
         [DataType(DataType.MultilineText)]
+        [Display(Name = "Опис")]
         public string Description { get; set; }
         [Required]
+        [Display(Name = "Дата")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Time { get; set; }
         [Required]
         [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email")]
         public string CreatorEmail { get; set; }
         [Required]
+        [Display(Name = "Ім'я та прізвище")]
         public string CreatorName { get; set; }
 
         public string Attachments { get; set; }
