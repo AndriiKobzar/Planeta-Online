@@ -16,10 +16,14 @@ namespace Planeta_Online.Models
         [Display(Name = "Опис")]
         public string Description { get; set; }
         public List<ApplicationUser> Listeners { get; set; }
-        [Display(Name = "Дата та час")]
+        [Display(Name = "Початок")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.DateTime)]
-        public DateTime Time { get; set; }
+        public DateTime From { get; set; }
+        [Display(Name = "Кінець")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.DateTime)]
+        public DateTime Till { get; set; }
         public string Attachments { get; set; }
     }
 
@@ -32,8 +36,16 @@ namespace Planeta_Online.Models
         [Required]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+        [Display(Name = "Початок")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.DateTime)]
         [Required]
-        public DateTime Time { get; set; }
+        public DateTime From { get; set; }
+        [Display(Name = "Кінець")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.DateTime)]
+        [Required]
+        public DateTime Till { get; set; }
     }
     public class EventRegistration
     {
@@ -70,9 +82,15 @@ namespace Planeta_Online.Models
         public string Description { get; set; }
 
         [Required]
-        [Display(Name = "Дата")]
+        [Display(Name = "Початок")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime Time { get; set; }
+        [DataType(DataType.DateTime)]
+        public DateTime From { get; set; }
+        [Display(Name = "Кінець")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.DateTime)]
+        [Required]
+        public DateTime Till { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]

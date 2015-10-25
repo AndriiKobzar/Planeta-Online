@@ -35,14 +35,27 @@ namespace Planeta_Online.Controllers
             return View();
         }
 
-        // POST: Books/Create
+        // POST: Event/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
         public ActionResult Create(EventApplication @event)
         {
+            foreach(Event e in db.Events)
+            {
+                if(GetIntersection(@event.From, @event.Till, e.From, e.Till)!=TimeSpan.Zero)
+                {
+                    return View(@event);
+                }
+            }
+            foreach(EventApplication e in db.EventApplications)
+            {
+                if (GetIntersection(@event.From, @event.Till, e.From, e.Till) != TimeSpan.Zero)
+                {
+                    return View(@event);
+                }
+            }
             if (ModelState.IsValid)
             {
                 //add attachments to event
@@ -68,7 +81,7 @@ namespace Planeta_Online.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "About";
 
             return View();
         }
@@ -95,5 +108,29 @@ namespace Planeta_Online.Controllers
             db.SaveChanges();
             return View("Success");
         }
+        private TimeSpan GetIntersection(DateTime mainStart, DateTime mainEnd, DateTime intervalStart, DateTime intervalEnd)
+        {
+            if (mainStart >= mainEnd || intervalStart >= intervalEnd)
+            {
+                return TimeSpan.Zero;
+            }
+
+            if (intervalStart >= mainEnd || intervalEnd <= mainStart)
+            {
+                return TimeSpan.Zero;
+            }
+
+            if (intervalStart >= mainStart && intervalEnd <= mainEnd)
+            {
+                return intervalEnd - intervalStart;
+            }
+
+            DateTime tempStart = intervalStart;
+            DateTime tempEnd = intervalEnd;
+
+            if (intervalStart < mainStart) tempStart = mainStart;
+            if (intervalEnd > mainEnd) tempEnd = mainEnd;
+            return tempEnd - tempStart;
+        } 
     }
 }

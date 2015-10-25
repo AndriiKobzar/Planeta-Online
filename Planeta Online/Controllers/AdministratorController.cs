@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.IO;
 
 namespace Planeta_Online.Controllers
 {
@@ -33,6 +36,7 @@ namespace Planeta_Online.Controllers
         }
         public ActionResult Confirm(int id)
         {
+            
             EventApplication application = db.EventApplications.Find(id);
             if(application==null)
             {
@@ -42,12 +46,22 @@ namespace Planeta_Online.Controllers
             {
                 db.EventApplications.Remove(application);
                 db.Events.Add(new Event() { Name=application.Name,
-                                            Time=application.Time,
+                                            From=application.From,
+                                            Till=application.Till,
                                             Attachments=application.Attachments,
                                             Description=application.Description});
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            
+        }
+        private void GeneratePDF(Event @event)
+        {
+            Document doc = new Document(PageSize.LETTER, 10, 10, 42, 35);
+            //PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream());
+            doc.Open();
+            Paragraph p = new Paragraph("Podannya");
+            doc.Close();
         }
     }
 }
