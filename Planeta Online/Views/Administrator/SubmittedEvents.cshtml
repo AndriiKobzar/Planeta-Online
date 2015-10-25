@@ -15,7 +15,16 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Time)
+            @Html.DisplayNameFor(model => model.CreatorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatorEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.From)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Till)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Attachments)
@@ -26,19 +35,22 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Name)            
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)            
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.CreatorName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CreatorEmail)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.From)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Time)
+            @Html.DisplayFor(modelItem => item.Till)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Attachments)

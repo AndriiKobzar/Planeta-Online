@@ -83,12 +83,12 @@ namespace Planeta_Online.Models
 
         [Required]
         [Display(Name = "Початок")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         public DateTime From { get; set; }
-        [Display(Name = "Кінець")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DataType(DataType.DateTime)]
+
+
+        [Display(Name = "Закінчення")]
+        [DataType(DataType.Date)]
         [Required]
         public DateTime Till { get; set; }
 
@@ -102,5 +102,49 @@ namespace Planeta_Online.Models
         public string CreatorName { get; set; }
 
         public string Attachments { get; set; }
+    }
+    public class EventApplicationViewModel
+    {
+        [Required]
+        [Display(Name = "Назва заходу")]
+        public string Name { get; set; }
+
+        [Required]
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Опис")]
+        public string Description { get; set; }
+
+        [Required]
+        [Display(Name = "Дата початку")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime FromDate { get; set; }
+
+        [Required]
+        [Display(Name = "Час початку")]
+        [DisplayFormat(ApplyFormatInEditMode = true)]
+        [DataType(DataType.Time)]
+        public TimeSpan FromTime { get; set; }
+
+        [Display(Name = "Дата закінчення")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.Date)]
+        [Required]
+        public DateTime TillDate { get; set; }
+
+        [Required]
+        [Display(Name = "Час закінчення")]
+        [DisplayFormat(ApplyFormatInEditMode = true)]
+        [DataType(DataType.Time)]
+        public TimeSpan TillTime { get; set; }
+
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email")]
+        public string CreatorEmail { get; set; }
+
+        [Required]
+        [Display(Name = "Ім'я та прізвище")]
+        public string CreatorName { get; set; }
     }
 }

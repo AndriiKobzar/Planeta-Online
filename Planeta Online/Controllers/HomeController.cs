@@ -40,18 +40,22 @@ namespace Planeta_Online.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EventApplication @event)
+        public ActionResult Create(EventApplicationViewModel @event)
         {
+            EventApplication newEvent = new EventApplication() { From = new DateTime(@event.FromDate.Year, @event.FromDate.Month, @event.FromDate.Day, @event.FromTime.Hours, @event.FromTime.Minutes, 0, DateTimeKind.Local),
+                                                                 Till = new DateTime(@event.TillDate.Year, @event.TillDate.Month, @event.TillDate.Day, @event.TillTime.Hours, @event.TillTime.Minutes, 0, DateTimeKind.Local),
+                                                                 CreatorEmail = @event.CreatorEmail, CreatorName = @event.CreatorName,
+                                                                 Name = @event.Name, Description = @event.Description};
             foreach(Event e in db.Events)
             {
-                if(GetIntersection(@event.From, @event.Till, e.From, e.Till)!=TimeSpan.Zero)
+                if(GetIntersection(newEvent.From, newEvent.Till, e.From, e.Till)!=TimeSpan.Zero)
                 {
                     return View(@event);
                 }
             }
             foreach(EventApplication e in db.EventApplications)
             {
-                if (GetIntersection(@event.From, @event.Till, e.From, e.Till) != TimeSpan.Zero)
+                if (GetIntersection(newEvent.From, newEvent.Till, e.From, e.Till) != TimeSpan.Zero)
                 {
                     return View(@event);
                 }
@@ -67,12 +71,12 @@ namespace Planeta_Online.Controllers
                         //get attachment's path
                         var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
                         //add file path and semicolon for separation
-                        @event.Attachments += path+";";
+                        newEvent.Attachments += path+";";
                         //save attachment's path
                         file.SaveAs(path);
                     }
                 }
-                db.EventApplications.Add(@event);
+                db.EventApplications.Add(newEvent);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
