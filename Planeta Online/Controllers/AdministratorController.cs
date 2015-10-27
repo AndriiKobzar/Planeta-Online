@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
+using System.Data.Entity;
+using System.Net;
 
 namespace Planeta_Online.Controllers
 {
@@ -18,17 +20,6 @@ namespace Planeta_Online.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-        public ActionResult CreateBook()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult CreateBook(BookViewModel book)
-        {
-            db.Books.Add(new Book() { Author = book.Author, Genre = book.Genre, Title = book.Title });
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
         public ActionResult SubmittedEvents()
         {
@@ -63,5 +54,72 @@ namespace Planeta_Online.Controllers
             Paragraph p = new Paragraph("Podannya");
             doc.Close();
         }
+        #region Books
+        public ActionResult Books()
+        {
+            return View(db.Books.ToList());
+        }
+        public ActionResult CreateBook()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateBook(BookViewModel book)
+        {
+            db.Books.Add(new Book() { Author = book.Author, Genre = book.Genre, Title = book.Title });
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult EditBook(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Book book = db.Books.Find(id);
+            if (book != null)
+            {
+                return View(db.Books.Find(id));
+            }
+            else return RedirectToAction("Books");
+        }
+        [HttpPost]
+        public ActionResult EditBook(Book model)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(model).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+        // GET: ApplicationUsers/Delete/5
+        public ActionResult DeleteBook(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Book book = db.Books.Find(id);
+            if (book == null)
+            {
+                return HttpNotFound();
+            }
+            return View(book);
+        }
+
+        // POST: Administrator/DeleteBook/5
+        [HttpPost, ActionName("DeleteBook")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            Book book = db.Books.Find(id);
+            db.Books.Remove(book);
+            db.SaveChanges();
+            return RedirectToAction("Books");
+        }
+
+        #endregion
     }
 }

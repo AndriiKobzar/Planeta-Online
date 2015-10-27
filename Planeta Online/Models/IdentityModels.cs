@@ -38,5 +38,6 @@ namespace Planeta_Online.Models
         public System.Data.Entity.DbSet<Planeta_Online.Models.EventRegistration> EventRegistrations { get; set; }
         public System.Data.Entity.DbSet<Planeta_Online.Models.EventApplication> EventApplications { get; set; }
         public System.Data.Entity.DbSet<Planeta_Online.Models.Book> Books { get; set; }
+
     }
 }
