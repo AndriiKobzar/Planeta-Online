@@ -21,17 +21,31 @@ namespace Planeta_Online.Controllers
         {
             return View();
         }
+        #region Events
+        public ActionResult Events()
+        {
+            List<EventViewModelForAdmin> events = new List<EventViewModelForAdmin>();
+            foreach(Event _event in db.Events.ToList())
+            {
+                EventViewModelForAdmin model = new EventViewModelForAdmin() { Description = _event.Description, From = _event.From, Till = _event.Till, Name = _event.Name };
+                // make a query to select visitors for this event
+                var query = from entry in db.EventRegistrations where entry.EventId == _event.Id select entry;
+                query = db.EventRegistrations.Where(m => m.EventId == _event.Id);
+                model.Visitors = query.ToList().Count;
+                events.Add(model);
+            }
+            return View(events);
+        }
         public ActionResult SubmittedEvents()
         {
             return View(db.EventApplications.ToList());
         }
         public ActionResult Confirm(int id)
-        {
-            
+        {            
             EventApplication application = db.EventApplications.Find(id);
             if(application==null)
             {
-                return null;
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest); 
             }
             else
             {
@@ -54,6 +68,7 @@ namespace Planeta_Online.Controllers
             Paragraph p = new Paragraph("Podannya");
             doc.Close();
         }
+        #endregion
         #region Books
         public ActionResult Books()
         {

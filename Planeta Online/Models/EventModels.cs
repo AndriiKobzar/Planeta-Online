@@ -32,7 +32,6 @@ namespace Planeta_Online.Models
         [Required]
         [Display(Name = "Назва")]
         public string Name { get; set; }
-        public string Lecturer { get; set; }
         [Required]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
@@ -146,5 +145,9 @@ namespace Planeta_Online.Models
         [Required]
         [Display(Name = "Ім'я та прізвище")]
         public string CreatorName { get; set; }
+    }
+    public class EventViewModelForAdmin : EventViewModel
+    {
+        public int Visitors { get; set; }
     }
 }

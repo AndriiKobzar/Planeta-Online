@@ -102,7 +102,7 @@ namespace Planeta_Online.Controllers
         }
         public ActionResult Register(int id)
         {
-            EventRegistrationViewModel model = new EventRegistrationViewModel() { EventName=db.Events.Find(id).Name };
+            EventRegistrationViewModel model = new EventRegistrationViewModel() { EventName=db.Events.Find(id).Name, EventId=id };
             return View(model);
         }
         [HttpPost]
