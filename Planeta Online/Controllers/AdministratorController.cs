@@ -27,7 +27,7 @@ namespace Planeta_Online.Controllers
             List<EventViewModelForAdmin> events = new List<EventViewModelForAdmin>();
             foreach(Event _event in db.Events.ToList())
             {
-                EventViewModelForAdmin model = new EventViewModelForAdmin() { Description = _event.Description, From = _event.From, Till = _event.Till, Name = _event.Name };
+                EventViewModelForAdmin model = new EventViewModelForAdmin() { Description = _event.Description, From = _event.From, Till = _event.Till, Name = _event.Name, Id=_event.Id };
                 // make a query to select visitors for this event
                 var query = from entry in db.EventRegistrations where entry.EventId == _event.Id select entry;
                 query = db.EventRegistrations.Where(m => m.EventId == _event.Id);
@@ -67,6 +67,26 @@ namespace Planeta_Online.Controllers
             doc.Open();
             Paragraph p = new Paragraph("Podannya");
             doc.Close();
+        }
+        public ActionResult Visitors(int? id)
+        {
+            if(id==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Event @event = db.Events.Find(id);
+            if(@event!=null)
+            {
+                var model = new VisitorsViewModel();
+                model.EventName = @event.Name;
+                var query = from entry in db.EventRegistrations where entry.EventId == @event.Id select entry.VisitorName;
+                model.Visitors = query.ToList();
+                return View(model);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
         #endregion
         #region Books

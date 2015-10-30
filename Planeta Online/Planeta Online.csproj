@@ -312,6 +312,7 @@
     <Content Include="Views\Calendar\Index.cshtml" />
     <Content Include="Views\Administrator\Books.cshtml" />
     <Content Include="Views\Administrator\Events.cshtml" />
+    <Content Include="Views\Administrator\Visitors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

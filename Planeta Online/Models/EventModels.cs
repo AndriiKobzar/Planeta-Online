@@ -148,6 +148,14 @@ namespace Planeta_Online.Models
     }
     public class EventViewModelForAdmin : EventViewModel
     {
+        public int Id { get; set; }
+        [Display(Name="Відвідувачі")]
         public int Visitors { get; set; }
+    }
+
+    public class VisitorsViewModel
+    {
+        public string EventName { get; set; }
+        public List<string> Visitors { get; set; }
     }
 }
