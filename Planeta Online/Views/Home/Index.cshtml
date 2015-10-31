@@ -26,8 +26,8 @@
             @Html.DisplayFor(modelItem => item.From)
         </td>
         <td>
-            @Html.ActionLink("Детальніше", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Зареєструватися", "Register", new { id = item.Id })
+            @Html.ActionLink("Детальніше", "Details", "Events", new { id = item.Id }) |
+            @Html.ActionLink("Зареєструватися", "Register", "Events", new { id = item.Id })
         </td>
     </tr>
 }

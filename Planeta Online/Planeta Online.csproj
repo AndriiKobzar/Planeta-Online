@@ -188,6 +188,7 @@
     <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -303,16 +304,17 @@
     <Content Include="Views\Administrator\EditBook.cshtml" />
     <Content Include="Views\Books\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Details.cshtml" />
-    <Content Include="Views\Home\Create.cshtml" />
-    <Content Include="Views\Home\Register.cshtml" />
-    <Content Include="Views\Home\Success.cshtml" />
+    <Content Include="Views\Events\Details.cshtml" />
+    <Content Include="Views\Events\Create.cshtml" />
+    <Content Include="Views\Events\Register.cshtml" />
+    <Content Include="Views\Events\Success.cshtml" />
     <Content Include="Views\Administrator\Index.cshtml" />
     <Content Include="Views\Administrator\SubmittedEvents.cshtml" />
     <Content Include="Views\Calendar\Index.cshtml" />
     <Content Include="Views\Administrator\Books.cshtml" />
     <Content Include="Views\Administrator\Events.cshtml" />
     <Content Include="Views\Administrator\Visitors.cshtml" />
+    <Content Include="Views\Shared\_EventPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
