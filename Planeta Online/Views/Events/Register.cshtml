@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Register";
 }
-
+@Html.Partial("_EventPartial")
 <h2>Зареєструватись на @Html.DisplayFor(m=>m.EventName)</h2>
 @using (Html.BeginForm())
 {

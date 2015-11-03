@@ -13,6 +13,10 @@ namespace Planeta_Online.Controllers
     public class EventsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext(); 
+        public ActionResult Index()
+        {
+            return View(db.Events.ToList());
+        }
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -95,6 +99,10 @@ namespace Planeta_Online.Controllers
             db.EventRegistrations.Add(new EventRegistration() { EventId = model.EventId, VisitorEmail = model.VisitorEmail, VisitorName = model.VisitorName });
             db.SaveChanges();
             return View("Success");
+        }
+        public ActionResult Calendar()
+        {
+            return View();
         }
         private TimeSpan GetIntersection(DateTime mainStart, DateTime mainEnd, DateTime intervalStart, DateTime intervalEnd)
         {
