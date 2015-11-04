@@ -8,7 +8,7 @@
 
 
 <table width="100%">
-    @for(int i = 0; i < Math.Round((double)Model.Count() / 3); i++)
+    @for(int i = 0; i < Math.Ceiling((double)Model.Count() / 3); i++)
     {
         <tr>
             @for (int j = i * 3; j < (i + 1) * 3 && j < Model.Count(); j++)
