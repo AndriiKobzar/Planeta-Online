@@ -3,11 +3,11 @@
 @{
     ViewBag.Title = "Заходи";
 }
-
+@Html.Partial("_EventPartial")
 <h2>Events</h2>
 
 
-<table>
+<table width="100%">
     @for(int i = 0; i < Math.Round((double)Model.Count() / 3); i++)
     {
         <tr>
