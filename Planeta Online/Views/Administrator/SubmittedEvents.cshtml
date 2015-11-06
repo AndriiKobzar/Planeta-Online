@@ -57,7 +57,8 @@
         </td>
         <td>
             @Html.ActionLink("Видалити", "DeleteEvent", new { id=item.Id }) |
-            @Html.ActionLink("Додати до списку подій", "Confirm", new { id=item.Id})
+            @Html.ActionLink("Додати до списку подій", "Confirm", new { id=item.Id}) |
+            @Html.ActionLink("Надіслати подання", "SendApplication", new { id=item.Id })
         </td>
     </tr>
 }
