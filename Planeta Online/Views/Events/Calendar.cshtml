@@ -1,34 +1,30 @@
-﻿
+﻿@model Planeta_Online.Models.CalendarModel
 @{
     ViewBag.Title = "Calendar";
 }
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" >
+</head>
 @Html.Partial("_EventPartial")
-<h2>Index</h2>
-<link rel="stylesheet" href="@Url.Content("/Content/jquery-ui-1.7.2.custom.css")"  type="text/css" />
-<link rel="stylesheet" href="@Url.Content("/Content/fullcalendar.css")"  type="text/css" />
-
-<script type="text/javascript"
-        src="@Url.Content("Scripts/jquery-1.11.3.min.js")">
-</script>
-<script type="text/javascript"
-        src="@Url.Content("Scripts/jquery-ui-1.11.4.min.js")">
-</script>
-<script type="text/javascript"
-        src="@Url.Content("Scripts/fullcalendar.min.js")">
-</script>
-<div id="calendar"></div>
-<script>
-$(document).ready(function() {
-    $('#calendar').fullCalendar({
-        theme: true,
-        header: {
-            left: '',
-            center: '',
-            right: ''
-        },
-        defaultView: 'agendaDay',
-        editable: false,
-        events: "/Calendar/GetEvents/"
-    });
-});
-</script>
+<h2>Календар подій</h2>
+<table width="100%" border="1">
+    <tr>
+        <td>Понеділок</td>
+        <td>Вівторок</td>
+        <td>Середа</td>
+        <td>Четвер</td>
+        <td>П'ятниця</td>
+        <td>Субота</td>
+        <td>Неділя</td>
+    </tr>
+    @for(int i = 0; i < 6; i++)
+    {
+        <tr>
+            @for(int j = 0; j<7; j++)
+            { 
+                <td>as</td>
+            }
+        </tr>
+    }
+</table>

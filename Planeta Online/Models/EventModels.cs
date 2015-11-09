@@ -10,20 +10,26 @@ namespace Planeta_Online.Models
     public class Event
     {      
         public int Id { get; set; }
+
         [Display(Name="Назва")]
         public string Name { get; set; }
+
         [DataType(DataType.MultilineText)]
         [Display(Name = "Опис")]
         public string Description { get; set; }
+
         public List<ApplicationUser> Listeners { get; set; }
+
         [Display(Name = "Початок")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.DateTime)]
         public DateTime From { get; set; }
+
         [Display(Name = "Кінець")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.DateTime)]
         public DateTime Till { get; set; }
+        [Display(Name="Вкладення")]
         public string Attachments { get; set; }
     }
 
@@ -82,12 +88,12 @@ namespace Planeta_Online.Models
 
         [Required]
         [Display(Name = "Початок")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         public DateTime From { get; set; }
 
 
         [Display(Name = "Закінчення")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [Required]
         public DateTime Till { get; set; }
 
@@ -100,6 +106,11 @@ namespace Planeta_Online.Models
         [Display(Name = "Ім'я та прізвище")]
         public string CreatorName { get; set; }
 
+        [Required]
+        [Display(Name = "Телефон")]
+        public string CreatorPhone { get; set; }
+
+        [Display(Name="Вкладення")]
         public string Attachments { get; set; }
     }
     public class EventApplicationViewModel
@@ -145,6 +156,15 @@ namespace Planeta_Online.Models
         [Required]
         [Display(Name = "Ім'я та прізвище")]
         public string CreatorName { get; set; }
+
+        [Required]
+        [Display(Name="Телефон")]
+        [DataType(DataType.PhoneNumber)]
+        public int CreatorPhone { get; set; }
+
+        [Required]
+        [Display(Name="Я погоджуюсь на обробку персональних даних.")]
+        public bool Agreed { get; set; }
     }
     public class EventViewModelForAdmin : EventViewModel
     {

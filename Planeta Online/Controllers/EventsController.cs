@@ -104,6 +104,7 @@ namespace Planeta_Online.Controllers
         {
             return View();
         }
+
         private TimeSpan GetIntersection(DateTime mainStart, DateTime mainEnd, DateTime intervalStart, DateTime intervalEnd)
         {
             if (mainStart >= mainEnd || intervalStart >= intervalEnd)

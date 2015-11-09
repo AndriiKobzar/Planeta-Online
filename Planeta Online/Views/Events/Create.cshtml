@@ -1,10 +1,19 @@
 ﻿@model Planeta_Online.Models.EventApplicationViewModel
-
+<head>
+    <script type="text/javascript">
+    function goFurther() {
+        if (document.getElementById("chkAgree").checked == true)
+            document.getElementById("btnSubmit").disabled = false;
+        else
+            document.getElementById("btnSubmit").disabled = true;
+    }
+    </script>
+</head>
 @{
     ViewBag.Title = "Create";
 }
 @Html.Partial("_EventPartial")
-<h2>Create</h2>
+<h2>Створення заходу</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,7 +21,31 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Event</h4>
+        <!--Organiser-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatorName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreatorName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreatorName, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <!--Organiser Email-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatorEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreatorEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreatorEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <!--Organiser Phone-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatorPhone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreatorPhone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreatorPhone, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <!--Event Name-->
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -30,23 +63,7 @@
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
-        <!--Organiser-->
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatorName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatorName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatorName, "", new { @class = "text-danger" })
-                
-            </div>
-        </div>
-        <!--Organiser Email-->
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatorEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatorEmail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatorEmail, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        
         <!--Begin date-->
         <div class="form-group">
             @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -85,10 +102,16 @@
                 <input type="file" value="Прикріпити файл" name="FileUpload" class="btn btn-default" />
             </div>
         }
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.Agreed, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Agreed, new { htmlAttributes = new { @class = "form-control", @id = "chkAgree", @onclick="goFurther()" } })
+                @Html.ValidationMessageFor(model => model.Agreed, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" id="btnSubmit" />
             </div>
         </div>
 
@@ -98,7 +121,6 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
