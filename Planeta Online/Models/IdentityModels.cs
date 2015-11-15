@@ -13,6 +13,7 @@ namespace Planeta_Online.Models
         public int Age { get; set; }
         public string Specialization { get; set; }
         public bool IsMember { get; set; }
+        public string DisplayName { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -27,6 +28,7 @@ namespace Planeta_Online.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            this.Configuration.LazyLoadingEnabled = true;
         }
 
         public static ApplicationDbContext Create()

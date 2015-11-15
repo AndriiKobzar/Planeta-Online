@@ -225,6 +225,14 @@
     <Compile Include="Migrations\201510251007347_AddTillTime.Designer.cs">
       <DependentUpon>201510251007347_AddTillTime.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511101855213_CreatorInfo.cs" />
+    <Compile Include="Migrations\201511101855213_CreatorInfo.Designer.cs">
+      <DependentUpon>201511101855213_CreatorInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511151058450_AddDisplayName.cs" />
+    <Compile Include="Migrations\201511151058450_AddDisplayName.Designer.cs">
+      <DependentUpon>201511151058450_AddDisplayName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BookModels.cs" />
@@ -347,6 +355,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510251007347_AddTillTime.resx">
       <DependentUpon>201510251007347_AddTillTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511101855213_CreatorInfo.resx">
+      <DependentUpon>201511101855213_CreatorInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511151058450_AddDisplayName.resx">
+      <DependentUpon>201511151058450_AddDisplayName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

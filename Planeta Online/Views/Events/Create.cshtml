@@ -96,22 +96,23 @@
                 @Html.ValidationMessageFor(model => model.TillTime, "", new { @class = "text-danger" })
             </div>
         </div>
-        @using (Html.BeginForm("Upload", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            <div class="form-group">
-                <input type="file" value="Прикріпити файл" name="FileUpload" class="btn btn-default" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Attachment, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Attachment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Attachment, "", new { @class = "text-danger" })
             </div>
-        }
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Agreed, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Agreed, new { htmlAttributes = new { @class = "form-control", @id = "chkAgree", @onclick="goFurther()" } })
+                @Html.EditorFor(model => model.Agreed, new { htmlAttributes = new { @class = "form-control", @id = "chkAgree", @onclick="goFurther()"} })
                 @Html.ValidationMessageFor(model => model.Agreed, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" id="btnSubmit" />
+                <input type="submit" value="Подати заявку" class="btn btn-default" id="btnSubmit" disabled="disabled" />
             </div>
         </div>
 

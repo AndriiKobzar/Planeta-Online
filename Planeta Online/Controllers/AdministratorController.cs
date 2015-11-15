@@ -13,7 +13,7 @@ using System.Net.Mail;
 
 namespace Planeta_Online.Controllers
 {
-    //[Authorize(Roles="SuperAdmin")]
+    [Authorize(Roles="SuperAdmin")]
     public class AdministratorController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();

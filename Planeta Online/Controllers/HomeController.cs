@@ -12,7 +12,10 @@ namespace Planeta_Online.Controllers
     public class HomeController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-
+        public ActionResult Index()
+        {
+            return RedirectToAction("Index", "Events");
+        }
         public ActionResult About()
         {
             ViewBag.Message = "About";

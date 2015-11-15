@@ -86,7 +86,7 @@ namespace Planeta_Online.Models
         public string Specialization { get; set; }
         [Required]
         [Display(Name = "Name")]
-        public string UserName { get; set; }
+        public string DisplayName { get; set; }
     }
 
     public class ResetPasswordViewModel

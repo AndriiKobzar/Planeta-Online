@@ -4,12 +4,26 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Planeta_Online.Models
 {
     public class Event
     {      
         public int Id { get; set; }
+
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email організатора")]
+        public string CreatorEmail { get; set; }
+
+        [Required]
+        [Display(Name = "Ім'я та прізвище організатора")]
+        public string CreatorName { get; set; }
+
+        [Required]
+        [Display(Name = "Телефон організатора")]
+        public string CreatorPhone { get; set; }
 
         [Display(Name="Назва")]
         public string Name { get; set; }
@@ -29,6 +43,7 @@ namespace Planeta_Online.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.DateTime)]
         public DateTime Till { get; set; }
+
         [Display(Name="Вкладення")]
         public string Attachments { get; set; }
     }
@@ -160,7 +175,9 @@ namespace Planeta_Online.Models
         [Required]
         [Display(Name="Телефон")]
         [DataType(DataType.PhoneNumber)]
-        public int CreatorPhone { get; set; }
+        public string CreatorPhone { get; set; }
+
+        public string Attachment { get; set; }
 
         [Required]
         [Display(Name="Я погоджуюсь на обробку персональних даних.")]
