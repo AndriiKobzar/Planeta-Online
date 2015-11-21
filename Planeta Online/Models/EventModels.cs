@@ -193,6 +193,11 @@ namespace Planeta_Online.Models
     public class VisitorsViewModel
     {
         public string EventName { get; set; }
-        public List<string> Visitors { get; set; }
+        public List<VisitorViewModel> Visitors { get; set; }
+    }
+    public class VisitorViewModel
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
     }
 }

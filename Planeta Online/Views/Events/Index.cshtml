@@ -16,7 +16,8 @@
                 <td>
                     <div class="col col-lg-4">
                         @Html.DisplayFor(model => model.ElementAt(j).Name)<br/>
-                        @Html.DisplayFor(model => model.ElementAt(j).From)-@Html.DisplayFor(model => model.ElementAt(j).Till)
+                        @Html.DisplayFor(model => model.ElementAt(j).From)-@Html.DisplayFor(model => model.ElementAt(j).Till)<br/>
+                        <input type="button" class="btn btn-link" value="Зареєструватися" onclick="location.href='@Url.Action("Register", "Events", new { id=Model.ElementAt(i).Id })'" />
                     </div>
                 </td>
             }           

@@ -18,11 +18,15 @@
                     <span class="icon-bar"></span>
                 </button><!--Html.ActionLink("Planeta", "Index", "Home", new { area = "" }, new { class = "navbar-brand" })-->
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+            <div class="navbar-collapse collapse" width="100%">
+                <ul class="nav navbar-nav" width="100%">
                     <li>@Html.ActionLink("Заходи", "Index", "Events")</li>                                                      
                     <li>@Html.ActionLink("Книги", "Index", "Books")</li>
                     <li>@Html.ActionLink("Про Планету", "About", "Home")</li>
+                    @if(User.Identity.IsAuthenticated&&User.IsInRole("SuperAdmin")) 
+                    {
+                        <li>@Html.ActionLink("Адміністратор", "Index", "Administrator")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

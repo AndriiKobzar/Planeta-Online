@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Planeta_Online.Models.EventApplication>
 
 @{
-    ViewBag.Title = "SubmittedEvents";
+    ViewBag.Title = "Заявки";
 }
 
 <h2>Зареєстровані події</h2>
@@ -53,7 +53,7 @@
             @Html.DisplayFor(modelItem => item.Till)
         </td>
         <td>
-            @Html.ActionLink(item.Attachments, item.Attachments)
+            <a href="@item.Attachments" target="_blank">@item.Attachments</a>
         </td>
         <td>
             @Html.ActionLink("Видалити", "DeleteEvent", new { id=item.Id }) |

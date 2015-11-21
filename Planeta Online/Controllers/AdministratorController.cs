@@ -55,7 +55,10 @@ namespace Planeta_Online.Controllers
                                             From=application.From,
                                             Till=application.Till,
                                             Attachments=application.Attachments,
-                                            Description=application.Description});
+                                            Description=application.Description,
+                                            CreatorEmail = application.CreatorEmail, 
+                                            CreatorName = application.CreatorName, 
+                                            CreatorPhone = application.CreatorPhone});
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -76,10 +79,11 @@ namespace Planeta_Online.Controllers
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;
+                smtp.Port = 25;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.UseDefaultCredentials = false;
                 NetworkCredential networkCredential = new NetworkCredential(from, "planetahub");
-                smtp.UseDefaultCredentials = true;
                 smtp.Credentials = networkCredential;
-                smtp.Port = 587;
                 smtp.Send(mail);
             }
             return RedirectToAction("Index");
@@ -123,8 +127,12 @@ namespace Planeta_Online.Controllers
             {
                 var model = new VisitorsViewModel();
                 model.EventName = @event.Name;
-                var query = from entry in db.EventRegistrations where entry.EventId == @event.Id select entry.VisitorName;
-                model.Visitors = query.ToList();
+                model.Visitors = new List<VisitorViewModel>();
+                var query = from entry in db.EventRegistrations where entry.EventId == @event.Id select entry;
+                foreach(EventRegistration registration in query.ToList())
+                {
+                    model.Visitors.Add(new VisitorViewModel() { Name = registration.VisitorName, Email = registration.VisitorEmail });
+                }
                 return View(model);
             }
             else
