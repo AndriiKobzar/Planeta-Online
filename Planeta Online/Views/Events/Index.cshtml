@@ -4,7 +4,7 @@
     ViewBag.Title = "Заходи";
 }
 @Html.Partial("_EventPartial")
-<h2>Events</h2>
+<h2>Заходи</h2>
 
 
 <table width="100%">
@@ -15,9 +15,7 @@
             {
                 <td>
                     <div class="col col-lg-4">
-                        @Html.DisplayFor(model => model.ElementAt(j).Name)<br/>
-                        @Html.DisplayFor(model => model.ElementAt(j).From)-@Html.DisplayFor(model => model.ElementAt(j).Till)<br/>
-                        <input type="button" class="btn btn-link" value="Зареєструватися" onclick="location.href='@Url.Action("Register", "Events", new { id=Model.ElementAt(i).Id })'" />
+                        <a href="~/Events/Details/@Model.ElementAt(j).Id"><img src="~/Applications/afisha.jpg" /></a>
                     </div>
                 </td>
             }           

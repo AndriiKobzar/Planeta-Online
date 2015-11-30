@@ -61,13 +61,6 @@ namespace Planeta_Online.Controllers
                     return View(@event);
                 }
             }
-            foreach (EventApplication e in db.EventApplications)
-            {
-                if (GetIntersection(newEvent.From, newEvent.Till, e.From, e.Till) != TimeSpan.Zero)
-                {
-                    return View(@event);
-                }
-            }
             if (ModelState.IsValid)
             {
                 ////add attachments to event

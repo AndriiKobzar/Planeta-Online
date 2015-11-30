@@ -91,10 +91,9 @@ namespace Planeta_Online.Controllers
         // returns a path to pdf application for this event
         private string GeneratePDF(EventApplication @event)
         {
+            string filename = "application" + @event.Id + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + ".pdf";
             Document document = new Document(PageSize.A4, 72, 65, 72, 65);
 
-            string filename = "application" + @event.Id + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + ".pdf";
-            filename = Server.MapPath("~\\Applications\\" + filename);
             PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(filename, FileMode.Create));
             document.AddAuthor("Planeta Hub");
             document.AddTitle("Подання на проведення заходу");
@@ -102,17 +101,40 @@ namespace Planeta_Online.Controllers
 
             string sylfaenpath = Environment.GetEnvironmentVariable("SystemRoot") + "\\fonts\\sylfaen.ttf";
             BaseFont sylfaen = BaseFont.CreateFont(sylfaenpath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-            Font head = new Font(sylfaen, 12f, Font.NORMAL, BaseColor.BLUE);
-            Font normal = new Font(sylfaen, 10f, Font.NORMAL, BaseColor.BLACK);
-            Font underline = new Font(sylfaen, 10f, Font.UNDERLINE, BaseColor.BLACK);
-            
+            Font head = new Font(sylfaen, 14f, Font.NORMAL, BaseColor.BLUE);
+            Font normal = new Font(sylfaen, 14f, Font.NORMAL, BaseColor.BLACK);
+            Font bold = new Font(sylfaen, 14f, Font.BOLD, BaseColor.BLACK);
+
             document.Open();
-            Paragraph leftside = new Paragraph("Проректору з науково-педагогічної роботи\nБугрову Володимиру Анатолійовичу", normal);
-            leftside.Alignment = 300;
-            document.Add(leftside);
-            document.Add(new Paragraph(string.Format("Просимо дозволу провести захід {0} у диско-клубі \"Планета\" ", @event.Name), normal));
-            document.Add(new Paragraph(" ", normal));
-            
+            Paragraph toWho = new Paragraph("Проректору з педагогічної роботи\nКиївського національного\nуніверситету ім. Т. Шевченка\nШамраю Володимиру Анатолійовичу", normal);
+            toWho.Alignment = 2; //makes text left aligned
+            document.Add(toWho);
+
+            Paragraph fromWho = new Paragraph("", normal);
+            fromWho.Alignment = 2;
+            document.Add(fromWho);
+
+            document.Add(new Paragraph("\n\nПодання\n\n", normal) { Alignment = 1 });
+
+            string text = string.Format("Просимо дозволу провести {0} у диско-клубі \"Планета\" з 10.01.2015 по 13.10.2015", "фестиваль Урбанавт");
+            Paragraph body = new Paragraph(text, normal);
+            document.Add(body);
+
+            string signature = "\n\n________________ Шамрай Володимир Анатолійович";
+            Paragraph ending = new Paragraph(signature, bold);
+            ending.Alignment = 2;
+            document.Add(ending);
+
+            string responsible = "Відповідальні:\n";
+            Paragraph resp1 = new Paragraph(responsible, normal);
+            document.Add(resp1);
+
+            Paragraph resp2 = new Paragraph("Заславська Інга", bold);
+            document.Add(resp2);
+
+            responsible = "студентка філософського факультету, напрямку культурологія ІІІ курс\nтел. 050 440 19 05";
+            Paragraph resp3 = new Paragraph(responsible, normal);
+            document.Add(resp3);
             document.Close();
             return filename;
         }
