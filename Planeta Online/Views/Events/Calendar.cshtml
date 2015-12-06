@@ -2,29 +2,18 @@
 @{
     ViewBag.Title = "Calendar";
 }
-<head>
-    <title></title>
-    <link rel="stylesheet" type="text/css" >
-</head>
 @Html.Partial("_EventPartial")
-<h2>Календар подій</h2>
-<table width="100%" border="1">
-    <tr>
-        <td>Понеділок</td>
-        <td>Вівторок</td>
-        <td>Середа</td>
-        <td>Четвер</td>
-        <td>П'ятниця</td>
-        <td>Субота</td>
-        <td>Неділя</td>
-    </tr>
-    @for(int i = 0; i < 6; i++)
-    {
-        <tr>
-            @for(int j = 0; j<7; j++)
-            { 
-                <td>as</td>
-            }
-        </tr>
-    }
-</table>
+<div id='calendar'></div>
+@section scripts{
+    <script type="text/javascript">
+    $(document).ready(function () {
+            $('#calendar').fullCalendar({
+                theme: true,
+
+                //defaultView: 'agendaDay',
+                editable: false,
+               // events: "/home/getevents/"
+            });
+        });
+    </script>
+}
