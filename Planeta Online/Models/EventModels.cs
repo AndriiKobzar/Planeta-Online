@@ -200,4 +200,13 @@ namespace Planeta_Online.Models
         public string Name { get; set; }
         public string Email { get; set; }
     }
+    public class JSONEvent
+    {
+        public string id { get; set; }
+        public string title { get; set; }
+        public string date { get; set; }
+        public string start { get; set; }
+        public string end { get; set; }
+        public string url { get; set; }
+    }
 }

@@ -8,6 +8,6 @@ namespace Planeta_Online.Models
 {
     public class CalendarModel
     {
-        public List<Event> Events { get; set; }
+        public string JsonString { get; set; }
     }
 }

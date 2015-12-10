@@ -58,6 +58,10 @@
       <HintPath>..\packages\ITextSharp\itextsharp.xtra.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SendGrid.SmtpApi, Version=1.3.1.0, Culture=neutral, PublicKeyToken=2ae73662c35d80e4, processorArchitecture=MSIL">
       <HintPath>..\packages\SendGrid.SmtpApi.1.3.1\lib\net40\SendGrid.SmtpApi.dll</HintPath>
       <Private>True</Private>
@@ -125,9 +129,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -319,7 +320,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\cupertino\animated-overlay.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -389,22 +389,10 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\cupertino\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
-    <Content Include="Scripts\cupertino\ui-bg_flat_15_cd0a0a_40x100.png" />
-    <Content Include="Scripts\cupertino\ui-bg_glass_100_e4f1fb_1x400.png" />
-    <Content Include="Scripts\cupertino\ui-bg_glass_50_3baae3_1x400.png" />
-    <Content Include="Scripts\cupertino\ui-bg_glass_80_d7ebf9_1x400.png" />
-    <Content Include="Scripts\cupertino\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
-    <Content Include="Scripts\cupertino\ui-bg_highlight-hard_70_000000_1x100.png" />
-    <Content Include="Scripts\cupertino\ui-bg_highlight-soft_100_deedf7_1x100.png" />
-    <Content Include="Scripts\cupertino\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
-    <Content Include="Scripts\cupertino\ui-icons_2694e8_256x240.png" />
-    <Content Include="Scripts\cupertino\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Scripts\cupertino\ui-icons_3d80b3_256x240.png" />
-    <Content Include="Scripts\cupertino\ui-icons_72a7cf_256x240.png" />
-    <Content Include="Scripts\cupertino\ui-icons_ffffff_256x240.png" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

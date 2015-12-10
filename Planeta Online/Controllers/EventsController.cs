@@ -1,5 +1,4 @@
-﻿
-using Planeta_Online.Models;
+﻿using Planeta_Online.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 
 namespace Planeta_Online.Controllers
 {
@@ -97,9 +97,59 @@ namespace Planeta_Online.Controllers
         }
         public ActionResult Calendar()
         {
+        //    var events = db.Events.ToList();
+        //    var list = new List<JSONEvent>();
+        //    foreach(Event _event in events)
+        //    {
+        //        list.Add(new JSONEvent()
+        //            {
+        //                date = _event.From.Date.ToString().Substring(0,8),
+        //                start = _event.From.TimeOfDay.ToString(),
+        //                end = _event.Till.TimeOfDay.ToString(),
+        //                id= _event.Id.ToString(),
+        //                url = Url.Action("Details", "Events", new { id=_event.Id}), 
+        //                title=_event.Name
+        //            });
+        //    }
+        //    string json = JsonConvert.SerializeObject(list);
             return View();
         }
+        public ActionResult GetEvents(double start, double end)
+        {
+            var fromDate = ConvertFromUnixTimestamp(start);
+            var toDate = ConvertFromUnixTimestamp(end);
 
+            //Get the events
+            //You may get from the repository also
+            var eventList = GetEvents();
+
+            var rows = eventList.ToArray();
+            return Json(rows, JsonRequestBehavior.AllowGet);
+        }
+
+        private List<JSONEvent> GetEvents()
+        {
+            List<JSONEvent> eventList = new List<JSONEvent>();
+
+            JSONEvent newEvent = new JSONEvent
+            {
+                id = "1",
+                title = "PostSchool",
+                start = DateTime.Now.AddDays(1).ToString("s"),
+                end = DateTime.Now.AddDays(1).ToString("s"),
+
+            };
+
+
+            eventList.Add(newEvent);
+            return eventList;
+        }
+
+        private static DateTime ConvertFromUnixTimestamp(double timestamp)
+        {
+            var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return origin.AddSeconds(timestamp);
+        }
         private TimeSpan GetIntersection(DateTime mainStart, DateTime mainEnd, DateTime intervalStart, DateTime intervalEnd)
         {
             if (mainStart >= mainEnd || intervalStart >= intervalEnd)

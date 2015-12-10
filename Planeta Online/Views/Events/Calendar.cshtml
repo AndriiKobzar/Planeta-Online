@@ -3,16 +3,24 @@
     ViewBag.Title = "Calendar";
 }
 @Html.Partial("_EventPartial")
-<div id='calendar'></div>
+<div id='calendar' width="50%" height="50%"></div>
 @section scripts{
     <script type="text/javascript">
     $(document).ready(function () {
             $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                },
+                monthNames: ["Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Понеділок', 'Вівторок', 'Середа', 'Четвер', 'П\'ятниця', 'Субота', 'Неділя'],
+                dayNamesShort: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'],
+                eventLimit: true,
                 theme: true,
-
                 //defaultView: 'agendaDay',
                 editable: false,
-               // events: "/home/getevents/"
+                events: "/events/getevents"
             });
         });
     </script>
