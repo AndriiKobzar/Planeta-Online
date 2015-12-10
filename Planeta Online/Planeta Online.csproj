@@ -49,13 +49,13 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="itextsharp">
-      <HintPath>..\packages\ITextSharp\itextsharp.dll</HintPath>
+      <HintPath>..\packages\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp.pdfa">
-      <HintPath>..\packages\ITextSharp\itextsharp.pdfa.dll</HintPath>
+      <HintPath>..\packages\itextsharp.pdfa.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp.xtra">
-      <HintPath>..\packages\ITextSharp\itextsharp.xtra.dll</HintPath>
+      <HintPath>..\packages\itextsharp.xtra.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -322,6 +322,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\Natasha.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-1.11.3.intellisense.js" />
     <Content Include="Scripts\fullcalendar.js" />
