@@ -37,7 +37,7 @@ namespace Planeta_Online
                       "~/Scripts/jquery-ui-1.10.4.min.js",
                       "~/Scripts/moment.min.js",
                       "~/Scripts/fullcalendar.min.js",
-                      "~/Scripts/lang-all.js"));
+                      "~/Scripts/lang/uk.js"));
 
         }
     }

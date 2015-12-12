@@ -130,18 +130,17 @@ namespace Planeta_Online.Controllers
         private List<JSONEvent> GetEvents()
         {
             List<JSONEvent> eventList = new List<JSONEvent>();
-
-            JSONEvent newEvent = new JSONEvent
+            foreach(Event _event in db.Events)
             {
-                id = "1",
-                title = "PostSchool",
-                start = DateTime.Now.AddDays(1).ToString("s"),
-                end = DateTime.Now.AddDays(1).ToString("s"),
-
-            };
-
-
-            eventList.Add(newEvent);
+                eventList.Add(new JSONEvent()
+                {
+                    id = _event.Id.ToString(),
+                    title = _event.Name,
+                    start = _event.From.ToString("s"),
+                    end = _event.Till.ToString("s"),
+                    url = Url.Action("Details","Events",new{id=_event.Id.ToString()})
+                });
+            }
             return eventList;
         }
 
