@@ -32,8 +32,6 @@ namespace Planeta_Online.Models
         [Display(Name = "Опис")]
         public string Description { get; set; }
 
-        public List<ApplicationUser> Listeners { get; set; }
-
         [Display(Name = "Початок")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.DateTime)]
@@ -44,10 +42,9 @@ namespace Planeta_Online.Models
         [DataType(DataType.DateTime)]
         public DateTime Till { get; set; }
 
-        [Display(Name="Вкладення")]
-        public string Attachments { get; set; }
+        //[Display(Name="Вкладення")]
+        //public string Attachments { get; set; }
     }
-
     public class EventViewModel
     {
         [Required]
@@ -189,7 +186,46 @@ namespace Planeta_Online.Models
         [Display(Name="Відвідувачі")]
         public int Visitors { get; set; }
     }
+    public class EventPoster
+    {
+        public int Id { get; set; }
 
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email організатора")]
+        public string CreatorEmail { get; set; }
+
+        [Required]
+        [Display(Name = "Ім'я та прізвище організатора")]
+        public string CreatorName { get; set; }
+
+        [Required]
+        [Display(Name = "Телефон організатора")]
+        public string CreatorPhone { get; set; }
+
+        [Display(Name = "Назва")]
+        public string Name { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Опис")]
+        public string Description { get; set; }
+
+        [Display(Name = "Початок")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.DateTime)]
+        public DateTime From { get; set; }
+
+        [Display(Name = "Кінець")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.DateTime)]
+        public DateTime Till { get; set; }
+
+        public string PosterPath { get; set; }
+    }
+    public class PosterModel
+    {
+        public int id { get; set; }
+    }
     public class VisitorsViewModel
     {
         public string EventName { get; set; }

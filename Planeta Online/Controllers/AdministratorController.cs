@@ -54,7 +54,6 @@ namespace Planeta_Online.Controllers
                 db.Events.Add(new Event() { Name=application.Name,
                                             From=application.From,
                                             Till=application.Till,
-                                            Attachments=application.Attachments,
                                             Description=application.Description,
                                             CreatorEmail = application.CreatorEmail, 
                                             CreatorName = application.CreatorName, 
@@ -161,6 +160,50 @@ namespace Planeta_Online.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+        }
+        public ActionResult GoToFilePicker(int? id)
+        {
+            if (db.EventApplications.Find(id) != null) return View("AddPoster", new PosterModel() { id =(int)id });
+            else return new HttpNotFoundResult();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddPoster(PosterModel model)
+        {
+            EventApplication application = db.EventApplications.Find(model.id);
+            if(application==null)
+            {
+                return new HttpNotFoundResult();
+            }
+            else
+            {
+                var path = "";
+                if (Request.Files.Count > 0)
+                {
+                    var file = Request.Files[0];
+
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        path = Path.Combine(Server.MapPath("~/Posters/"), fileName);
+                        file.SaveAs(path);
+                    }
+                }
+                db.EventApplications.Remove(application);
+                db.Posters.Add(new EventPoster()
+                {
+                    Name = application.Name,
+                    CreatorEmail = application.CreatorEmail,
+                    CreatorName = application.CreatorName,
+                    CreatorPhone = application.CreatorPhone,
+                    Description = application.Description,
+                    From = application.From,
+                    Till = application.Till,
+                    PosterPath = path
+                });
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
         #endregion
         #region Books

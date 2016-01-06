@@ -1,4 +1,4 @@
-﻿@model  IEnumerable<Planeta_Online.Models.Event>
+﻿@model  IEnumerable<Planeta_Online.Models.EventPoster>
 
 @{
     ViewBag.Title = "Заходи";
@@ -16,7 +16,7 @@
                 <td>
                     <div class="col col-lg-4">
                         <br />
-                        <a href="~/Events/Details/@Model.ElementAt(j).Id"><img src="~/Content/afisha.jpg" /></a>
+                        <a href="~/Events/Details/@Model.ElementAt(j).Id"><img src="@Model.ElementAt(i).PosterPath" /></a>
                     </div>
                 </td>
             }           

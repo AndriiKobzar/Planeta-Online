@@ -1,8 +1,8 @@
-﻿using System.Data.Entity;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace Planeta_Online.Models
 {
@@ -36,10 +36,11 @@ namespace Planeta_Online.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<Planeta_Online.Models.Event> Events { get; set; }
-        public System.Data.Entity.DbSet<Planeta_Online.Models.EventRegistration> EventRegistrations { get; set; }
-        public System.Data.Entity.DbSet<Planeta_Online.Models.EventApplication> EventApplications { get; set; }
-        public System.Data.Entity.DbSet<Planeta_Online.Models.Book> Books { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<EventRegistration> EventRegistrations { get; set; }
+        public DbSet<EventApplication> EventApplications { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<EventPoster> Posters { get; set; }
 
     }
 }

@@ -42,14 +42,15 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <IncludeSetACLProviderOnDestination>False</IncludeSetACLProviderOnDestination>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="itextsharp">
@@ -242,6 +243,10 @@
     <Compile Include="Migrations\201511151058450_AddDisplayName.Designer.cs">
       <DependentUpon>201511151058450_AddDisplayName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601051728367_PostersMigration.cs" />
+    <Compile Include="Migrations\201601051728367_PostersMigration.Designer.cs">
+      <DependentUpon>201601051728367_PostersMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BookModels.cs" />
@@ -407,6 +412,7 @@
     <Content Include="Views\Administrator\Events.cshtml" />
     <Content Include="Views\Administrator\Visitors.cshtml" />
     <Content Include="Views\Shared\_EventPartial.cshtml" />
+    <Content Include="Views\Administrator\AddPoster.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -446,6 +452,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511151058450_AddDisplayName.resx">
       <DependentUpon>201511151058450_AddDisplayName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601051728367_PostersMigration.resx">
+      <DependentUpon>201601051728367_PostersMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
