@@ -8,7 +8,7 @@
     }
     </script>
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Заявка";
 }
 @Html.Partial("_EventPartial")
 <h2>Створення заходу</h2>
@@ -17,8 +17,9 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
+        @Html.ValidationSummary()<!--For general validation errors-->
         <!--Organiser-->
         <div class="form-group">
             @Html.LabelFor(model => model.CreatorName, htmlAttributes: new { @class = "control-label col-md-2" })

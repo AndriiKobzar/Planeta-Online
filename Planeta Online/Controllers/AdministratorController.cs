@@ -168,7 +168,7 @@ namespace Planeta_Online.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddPoster(PosterModel model)
+        public ActionResult AddPoster(PosterModel model, HttpPostedFileBase fileUpload)
         {
             EventApplication application = db.EventApplications.Find(model.id);
             if(application==null)
@@ -187,10 +187,11 @@ namespace Planeta_Online.Controllers
                         var fileName = Path.GetFileName(file.FileName);
                         path = Path.Combine(Server.MapPath("~/Posters/"), fileName);
                         file.SaveAs(path);
+                        path = "/Posters/" + fileName;
                     }
                 }
                 db.EventApplications.Remove(application);
-                db.Posters.Add(new EventPoster()
+                Event e = db.Events.Add(new Event()
                 {
                     Name = application.Name,
                     CreatorEmail = application.CreatorEmail,
@@ -199,6 +200,11 @@ namespace Planeta_Online.Controllers
                     Description = application.Description,
                     From = application.From,
                     Till = application.Till,
+                });
+                db.SaveChanges();
+                db.Posters.Add(new EventPoster()
+                {
+                    EventId = e.Id,
                     PosterPath = path
                 });
                 db.SaveChanges();

@@ -54,10 +54,15 @@ namespace Planeta_Online.Controllers
                 Description = @event.Description,
                 Attachments = @event.Attachment
             };
+            if(newEvent.From >= newEvent.Till)
+            {
+                ModelState.AddModelError(string.Empty, "Дата та час початку події мають бути раніше, ніж дата та час кінця події.");
+            }
             foreach (Event e in db.Events)
             {
                 if (GetIntersection(newEvent.From, newEvent.Till, e.From, e.Till) != TimeSpan.Zero)
                 {
+                    ModelState.AddModelError(string.Empty, "В обраний проміжок часу вже заплановано подію.");
                     return View(@event);
                 }
             }
