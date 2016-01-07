@@ -178,6 +178,7 @@ namespace Planeta_Online.Models
         [RegularExpression(@"\(0[0-9]{2}\)[0-9]{7}", ErrorMessage ="Невірний формат телефону. Приклад: (XXX)XXXXXXX")]
         public string CreatorPhone { get; set; }
 
+        [Display(Name="Вкладення")]
         public string Attachment { get; set; }
 
         [Required(ErrorMessage = "Це поле необхідне")]
