@@ -63,34 +63,38 @@ namespace Planeta_Online.Controllers
             }
             
         }
-        public ActionResult SendApplication(int id)
+        public FileResult SendApplication(int id)
         {
             EventApplication _event = db.EventApplications.Find(id);
             string filepath = GeneratePDF(_event);
-            string from = "planeta.workspace@gmail.com"; //example:- sourabh9303@gmail.com
-            using (MailMessage mail = new MailMessage(from, "andrykobzar@gmail.com"))
-            {
-                mail.Subject = "";
-                mail.Body = "";
-                FileStream inputStream = new FileStream(filepath, FileMode.Open);
-                mail.Attachments.Add(new Attachment(inputStream, filepath));
-                mail.IsBodyHtml = false;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com";
-                smtp.EnableSsl = true;
-                smtp.Port = 25;
-                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtp.UseDefaultCredentials = false;
-                NetworkCredential networkCredential = new NetworkCredential(from, "planetahub");
-                smtp.Credentials = networkCredential;
-                smtp.Send(mail);
-            }
-            return RedirectToAction("Index");
+            //string from = "planeta.workspace@gmail.com";
+            //using (MailMessage mail = new MailMessage(from, "andrykobzar@gmail.com"))
+            //{
+            //    mail.Subject = "";
+            //    mail.Body = "";
+            //    FileStream inputStream = new FileStream(filepath, FileMode.Open);
+            //    mail.Attachments.Add(new Attachment(inputStream, filepath));
+            //    mail.IsBodyHtml = false;
+            //    SmtpClient smtp = new SmtpClient();
+            //    smtp.Host = "smtp.gmail.com";
+            //    smtp.EnableSsl = true;
+            //    smtp.Port = 25;
+            //    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            //    smtp.UseDefaultCredentials = false;
+            //    NetworkCredential networkCredential = new NetworkCredential(from, "planetahub");
+            //    smtp.Credentials = networkCredential;
+            //    smtp.Send(mail);
+            //}
+            byte[] fileBytes = System.IO.File.ReadAllBytes(filepath);
+            string fileName = _event.Name+"_Podannya.pdf";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
         // returns a path to pdf application for this event
         private string GeneratePDF(EventApplication @event)
         {
+            // initialize the file name
             string filename = "application" + @event.Id + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + ".pdf";
+            filename = Path.Combine(Server.MapPath("~/Applications/"), filename);
             Document document = new Document(PageSize.A4, 72, 65, 72, 65);
 
             PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(filename, FileMode.Create));
@@ -105,7 +109,7 @@ namespace Planeta_Online.Controllers
             Font bold = new Font(sylfaen, 14f, Font.BOLD, BaseColor.BLACK);
 
             document.Open();
-            Paragraph toWho = new Paragraph("Проректору з педагогічної роботи\nКиївського національного\nуніверситету ім. Т. Шевченка\nШамраю Володимиру Анатолійовичу", normal);
+            Paragraph toWho = new Paragraph("Проректору з навчально-виховної роботи\nКиївського національного університету ім. Т. Шевченка\nШамраю Володимиру Анатолійовичу", normal);
             toWho.Alignment = 2; //makes text left aligned
             document.Add(toWho);
 
@@ -115,7 +119,7 @@ namespace Planeta_Online.Controllers
 
             document.Add(new Paragraph("\n\nПодання\n\n", normal) { Alignment = 1 });
 
-            string text = string.Format("Просимо дозволу провести {0} у диско-клубі \"Планета\" з 10.01.2015 по 13.10.2015", "фестиваль Урбанавт");
+            string text = string.Format("Просимо дозволу провести {0} у диско-клубі \"Планета\" з {1:dd.mm.yyyy hh:mm} по {2:dd.mm.yyyy hh:mm}", @event.Name, @event.From, @event.Till);
             Paragraph body = new Paragraph(text, normal);
             document.Add(body);
 
