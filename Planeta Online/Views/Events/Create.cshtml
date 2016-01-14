@@ -7,7 +7,6 @@
             document.getElementById("btnSubmit").disabled = true;
     }
     </script>
-<script type="text/javascript" src="~/Scripts/jQueryUI-datepicker-UA.js"></script>
 @{
     ViewBag.Title = "Заявка";
 }
@@ -20,7 +19,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        @Html.ValidationSummary()<!--For general validation errors-->
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })<!--For general validation errors-->
         <!--Organiser-->
         <div class="form-group">
             @Html.LabelFor(model => model.CreatorName, htmlAttributes: new { @class = "control-label col-md-2" })

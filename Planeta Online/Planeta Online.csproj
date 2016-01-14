@@ -266,7 +266,6 @@
     <Content Include="App_Data\aspnet-Planeta Online-20150926112527_log.ldf">
       <DependentUpon>aspnet-Planeta Online-20150926112527.mdf</DependentUpon>
     </Content>
-    <Content Include="Content\afisha.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fullcalendar.css" />

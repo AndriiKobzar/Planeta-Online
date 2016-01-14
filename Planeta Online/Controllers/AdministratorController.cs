@@ -9,7 +9,6 @@ using iTextSharp.text;
 using System.IO;
 using System.Data.Entity;
 using System.Net;
-using System.Net.Mail;
 
 namespace Planeta_Online.Controllers
 {
@@ -62,6 +61,13 @@ namespace Planeta_Online.Controllers
                 return RedirectToAction("Index");
             }
             
+        }
+        public ActionResult DeleteEvent(int id)
+        {
+
+            db.EventApplications.Remove(db.EventApplications.Find(id));
+            db.SaveChanges();
+            return RedirectToAction("SubmittedEvents");
         }
         public FileResult SendApplication(int id)
         {

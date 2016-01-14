@@ -50,7 +50,7 @@ namespace Planeta_Online.Models
     {
         [Required]
         [Display(Name = "Email")]
-        [EmailAddress]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required]
