@@ -14,6 +14,7 @@ html {
 }
 body {
   margin: 0;
+  background-color: white;
 }
 article,
 aside,
@@ -2285,6 +2286,7 @@ th {
 .table .table {
   background-color: #222222;
 }
+
 .table-condensed > thead > tr > th,
 .table-condensed > tbody > tr > th,
 .table-condensed > tfoot > tr > th,
@@ -2295,6 +2297,10 @@ th {
 }
 .table-bordered {
   border: 1px solid #464545;
+}
+/*for stripped style of .table*/
+.table > tbody > tr:nth-of-type(odd) {
+  background-color: #3d3d3d;
 }
 .table-bordered > thead > tr > th,
 .table-bordered > tbody > tr > th,
