@@ -289,31 +289,5 @@ namespace Planeta_Online.Controllers
         }
 
         #endregion
-        #region Blog
-        public ActionResult Blog()
-        {
-            return View(db.Blog.ToList());
-        }
-        [HttpPost]
-        public ActionResult EditPost(int id)
-        {
-            var instance = db.Blog.Find(id);
-            return View(instance);
-        }
-        public ActionResult DeletePost(int id)
-        {
-            var instance = db.Blog.Find(id);
-            return View(instance);
-        }
-        [HttpPost, ActionName("DeleteBook")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeletePostConfirmed(int? id)
-        {
-            var instance = db.Blog.Find(id);
-            db.Blog.Remove(instance);
-            db.SaveChanges();
-            return RedirectToAction("Books");
-        }
-        #endregion
     }
 }

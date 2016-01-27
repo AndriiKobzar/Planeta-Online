@@ -196,7 +196,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdministratorController.cs" />
-    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -252,13 +251,8 @@
     <Compile Include="Migrations\201601061323261_UpdatePoster.Designer.cs">
       <DependentUpon>201601061323261_UpdatePoster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601271856230_BlogMigration.cs" />
-    <Compile Include="Migrations\201601271856230_BlogMigration.Designer.cs">
-      <DependentUpon>201601271856230_BlogMigration.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\BlogPost.cs" />
     <Compile Include="Models\BookModels.cs" />
     <Compile Include="Models\Calendar.cs" />
     <Compile Include="Models\EventModels.cs" />
@@ -422,9 +416,6 @@
     <Content Include="Views\Administrator\Visitors.cshtml" />
     <Content Include="Views\Shared\_EventPartial.cshtml" />
     <Content Include="Views\Administrator\AddPoster.cshtml" />
-    <Content Include="Views\Blog\Index.cshtml" />
-    <Content Include="Views\Administrator\Blog.cshtml" />
-    <Content Include="Views\Administrator\EditPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -470,9 +461,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601061323261_UpdatePoster.resx">
       <DependentUpon>201601061323261_UpdatePoster.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601271856230_BlogMigration.resx">
-      <DependentUpon>201601271856230_BlogMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
