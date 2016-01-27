@@ -5003,10 +5003,11 @@ a.badge:focus {
 .jumbotron h1,
 .jumbotron .h1 {
   color: inherit;
+  font-size: 23px;
 }
 .jumbotron p {
   margin-bottom: 15px;
-  font-size: 23px;
+  font-size: 17px;
   font-weight: 200;
 }
 .jumbotron > hr {

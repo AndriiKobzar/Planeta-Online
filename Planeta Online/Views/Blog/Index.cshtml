@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Planeta_Online.Models.BlogPost>
+@{
+    ViewBag.Title = "Блог";
+}
+
+<h2>Блог</h2>
+@foreach (var item in Model)
+{
+    <div class="jumbotron">
+        <h2>@item.Title</h2>
+        <p>@item.Text</p>
+        <div align="right">@item.TimeStamp</div>
+    </div>
+}
