@@ -37,6 +37,7 @@ ga('send', 'pageview');
                     <li>@Html.ActionLink("Заходи", "Index", "Events")</li>                                                      
                     <li>@Html.ActionLink("Книги", "Index", "Books")</li>
                     <li>@Html.ActionLink("Про Планету", "About", "Home")</li>
+                    <li>@Html.ActionLink("Блог", "Index", "Blog")</li>
                     @if(User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin")) 
                     {
                         <li>@Html.ActionLink("Адміністратор", "Index", "Administrator")</li>

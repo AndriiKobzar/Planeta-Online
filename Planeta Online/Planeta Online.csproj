@@ -252,6 +252,10 @@
     <Compile Include="Migrations\201601061323261_UpdatePoster.Designer.cs">
       <DependentUpon>201601061323261_UpdatePoster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601280916174_BlogMigration.cs" />
+    <Compile Include="Migrations\201601280916174_BlogMigration.Designer.cs">
+      <DependentUpon>201601280916174_BlogMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlogPost.cs" />
@@ -418,6 +422,11 @@
     <Content Include="Views\Administrator\Visitors.cshtml" />
     <Content Include="Views\Shared\_EventPartial.cshtml" />
     <Content Include="Views\Administrator\AddPoster.cshtml" />
+    <Content Include="Views\Administrator\Blog.cshtml" />
+    <Content Include="Views\Administrator\EditPost.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Administrator\DeletePost.cshtml" />
+    <Content Include="Views\Administrator\CreatePost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -463,6 +472,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601061323261_UpdatePoster.resx">
       <DependentUpon>201601061323261_UpdatePoster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601280916174_BlogMigration.resx">
+      <DependentUpon>201601280916174_BlogMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

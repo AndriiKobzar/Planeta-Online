@@ -289,5 +289,57 @@ namespace Planeta_Online.Controllers
         }
 
         #endregion
-    }
+        
+        #region Blog
+        public ActionResult Blog()
+        {
+            return View(db.Blog.ToList());
+        }
+        public ActionResult CreatePost()
+        {
+           return View();
+        }
+        [HttpPost]
+        public ActionResult CreatePost(BlogPostViewModel model)
+        {
+            db.Blog.Add(new BlogPost() { Text = model.Text, TimeStamp = DateTime.Now, Title = model.Title });
+            db.SaveChanges();
+            return RedirectToAction("Blog");
+        }
+        public ActionResult EditPost(int? id)
+        {
+            if(id==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var instance = db.Blog.Find(id);
+            return View(instance);
+        }
+        [HttpPost]
+        public ActionResult EditPost(BlogPost model)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(model).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Blog");
+            }
+            return View(model);
+        }
+        public ActionResult DeletePost(int id)
+        {
+            var instance = db.Blog.Find(id);
+            return View(instance);
+        }
+        [HttpPost, ActionName("DeletePost")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePostConfirmed(int? id)
+        {
+            var instance = db.Blog.Find(id);
+            db.Blog.Remove(instance);
+            db.SaveChanges();
+            return RedirectToAction("Books");
+        }
+        #endregion
+   }
 }

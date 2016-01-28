@@ -27,14 +27,14 @@
             @Html.DisplayNameFor(model => model.From)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.From)
+            @Model.From.ToString("dd.mm.yyyy H:mm")
         </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Till)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Till)
+            @Model.Till.ToString("dd.mm.yyyy H:mm")
         </dd>
 
     </dl>
