@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Planeta_Online.Models.BlogPost>
+@{
+    ViewBag.Title = "Blog";
+}
+
+<h2>Редагування блогу</h2>
+<input type="button" class="btn btn-link" value="Створити нову статтю" onclick="location.href='@Url.Action("CreatePost")'"/>
+<table class="table">
+    <tr>
+        <th>Назва</th>
+        <th>Дата</th>
+        <th>Дії</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Title)</td>
+            <td>@Html.DisplayFor(modelItem => item.TimeStamp)</td>
+            <td>
+                @Html.ActionLink("Редагувати", "EditPost", new { id = item.Id }) |
+                @Html.ActionLink("Видалити", "DeletePost", new { id = item.Id })
+        </td>
+    </tr>
+    }
+</table>
