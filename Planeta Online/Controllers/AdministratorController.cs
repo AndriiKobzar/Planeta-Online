@@ -303,9 +303,9 @@ namespace Planeta_Online.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult CreatePost(FormCollection formValues, BlogPostViewModel model)
+        public ActionResult CreatePost(BlogPostViewModel model)
         {
-            db.Blog.Add(new BlogPost() {TimeStamp = DateTime.Now, Title = model.Title,Text= formValues["editor"] });
+            db.Blog.Add(new BlogPost() {TimeStamp = DateTime.Now, Title = model.Title, Text= model.Text });
             try
             { db.SaveChanges(); }
             catch (DbEntityValidationException e)
