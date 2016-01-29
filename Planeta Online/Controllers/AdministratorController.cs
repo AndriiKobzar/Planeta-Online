@@ -9,6 +9,7 @@ using iTextSharp.text;
 using System.IO;
 using System.Data.Entity;
 using System.Net;
+using System.Data.Entity.Validation;
 
 namespace Planeta_Online.Controllers
 {
@@ -299,11 +300,18 @@ namespace Planeta_Online.Controllers
         {
            return View();
         }
+
         [HttpPost]
-        public ActionResult CreatePost(BlogPostViewModel model)
+        [ValidateInput(false)]
+        public ActionResult CreatePost(FormCollection formValues, BlogPostViewModel model)
         {
-            db.Blog.Add(new BlogPost() { Text = model.Text, TimeStamp = DateTime.Now, Title = model.Title });
-            db.SaveChanges();
+            db.Blog.Add(new BlogPost() {TimeStamp = DateTime.Now, Title = model.Title,Text= formValues["editor"] });
+            try
+            { db.SaveChanges(); }
+            catch (DbEntityValidationException e)
+            {
+                return View(new BlogPost() { Title=e.Message });
+            }
             return RedirectToAction("Blog");
         }
         public ActionResult EditPost(int? id)
