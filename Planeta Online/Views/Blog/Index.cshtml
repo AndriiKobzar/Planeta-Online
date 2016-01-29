@@ -8,7 +8,7 @@
 {
     <div class="jumbotron">
         <h2>@item.Title</h2>
-        <p>@item.Text</p>
+        <p>@Html.Raw(item.Text)</p>
         <div align="right">@item.TimeStamp</div>
     </div>
 }

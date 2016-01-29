@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Planeta_Online.Models
 {
@@ -11,11 +12,12 @@ namespace Planeta_Online.Models
         public DateTime TimeStamp { get; set; }
 
         [Required]
-        [DisplayName("Назва")]
+        [DisplayName("Назва")]       
         public string Title { get; set; }
 
         [Required]
         [DisplayName("Текст")]
+        [AllowHtml]
         [DataType(DataType.MultilineText)]
         public string Text { get; set; }
     }
@@ -27,6 +29,7 @@ namespace Planeta_Online.Models
 
         [Required]
         [DisplayName("Текст")]
+        [AllowHtml]
         [DataType(DataType.MultilineText)]
         public string Text { get; set; }
     }

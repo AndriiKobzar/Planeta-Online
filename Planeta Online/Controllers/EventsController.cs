@@ -1,12 +1,9 @@
 ﻿using Planeta_Online.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Newtonsoft.Json;
 
 namespace Planeta_Online.Controllers
 {
@@ -54,10 +51,16 @@ namespace Planeta_Online.Controllers
                 Description = @event.Description,
                 Attachments = @event.Attachment
             };
+            if(newEvent.From<DateTime.Now)
+            {
+                ModelState.AddModelError(string.Empty, "Дата початку події має бути такою, яка ще не наступила.");
+            }
+
             if(newEvent.From >= newEvent.Till)
             {
                 ModelState.AddModelError(string.Empty, "Дата та час початку події мають бути раніше, ніж дата та час кінця події.");
             }
+            
             foreach (Event e in db.Events)
             {
                 if (GetIntersection(newEvent.From, newEvent.Till, e.From, e.Till) != TimeSpan.Zero)
@@ -68,20 +71,6 @@ namespace Planeta_Online.Controllers
             }
             if (ModelState.IsValid)
             {
-                ////add attachments to event
-                //foreach (HttpPostedFile file in Request.Files)
-                //{
-                //    if (file != null && file.ContentLength > 0)
-                //    {
-                //        var fileName = Path.GetFileName(file.FileName);
-                //        //get attachment's path
-                //        var path = Path.Combine(Server.MapPath("~/Attachments/"), fileName);
-                //        //add file path and semicolon for separation
-                //        newEvent.Attachments += path + ";";
-                //        //save attachment's path
-                //        file.SaveAs(path);
-                //    }
-                //}
                 db.EventApplications.Add(newEvent);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Events");
@@ -102,21 +91,6 @@ namespace Planeta_Online.Controllers
         }
         public ActionResult Calendar()
         {
-        //    var events = db.Events.ToList();
-        //    var list = new List<JSONEvent>();
-        //    foreach(Event _event in events)
-        //    {
-        //        list.Add(new JSONEvent()
-        //            {
-        //                date = _event.From.Date.ToString().Substring(0,8),
-        //                start = _event.From.TimeOfDay.ToString(),
-        //                end = _event.Till.TimeOfDay.ToString(),
-        //                id= _event.Id.ToString(),
-        //                url = Url.Action("Details", "Events", new { id=_event.Id}), 
-        //                title=_event.Name
-        //            });
-        //    }
-        //    string json = JsonConvert.SerializeObject(list);
             return View();
         }
         public ActionResult GetEvents(double start, double end)
@@ -125,7 +99,6 @@ namespace Planeta_Online.Controllers
             var toDate = ConvertFromUnixTimestamp(end);
 
             //Get the events
-            //You may get from the repository also
             var eventList = GetEvents();
 
             var rows = eventList.ToArray();
