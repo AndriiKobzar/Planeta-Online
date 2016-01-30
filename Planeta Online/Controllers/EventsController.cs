@@ -12,6 +12,7 @@ namespace Planeta_Online.Controllers
         ApplicationDbContext db = new ApplicationDbContext(); 
         public ActionResult Index()
         {
+              
             return View(db.Posters.ToList());
         }
         public ActionResult Details(int? id)

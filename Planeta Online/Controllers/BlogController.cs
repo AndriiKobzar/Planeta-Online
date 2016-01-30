@@ -11,7 +11,9 @@ namespace Planeta_Online.Controllers
         // GET: Blog
         public ActionResult Index()
         {
-            return View(db.Blog.ToList());
+            var list = db.Blog.ToList();
+            list.Sort(delegate (BlogPost p1, BlogPost p2) { return p2.TimeStamp.CompareTo(p1.TimeStamp); });
+            return View(list);
         }
     }
 }

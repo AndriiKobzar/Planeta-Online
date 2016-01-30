@@ -294,7 +294,9 @@ namespace Planeta_Online.Controllers
         #region Blog
         public ActionResult Blog()
         {
-            return View(db.Blog.ToList());
+            var list = db.Blog.ToList();
+            list.Sort(delegate (BlogPost p1, BlogPost p2) { return p2.TimeStamp.CompareTo(p1.TimeStamp); });
+            return View(list);
         }
         public ActionResult CreatePost()
         {
@@ -305,7 +307,9 @@ namespace Planeta_Online.Controllers
         [ValidateInput(false)]
         public ActionResult CreatePost(BlogPostViewModel model)
         {
+            
             db.Blog.Add(new BlogPost() {TimeStamp = DateTime.Now, Title = model.Title, Text= model.Text });
+            db.Blog.OrderByDescending(elem => elem.TimeStamp);
             try
             { db.SaveChanges(); }
             catch (DbEntityValidationException e)
