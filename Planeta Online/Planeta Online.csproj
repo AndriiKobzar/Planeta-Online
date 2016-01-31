@@ -256,6 +256,10 @@
     <Compile Include="Migrations\201601280916174_BlogMigration.Designer.cs">
       <DependentUpon>201601280916174_BlogMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601310926370_OptimizingPostersMigration.cs" />
+    <Compile Include="Migrations\201601310926370_OptimizingPostersMigration.Designer.cs">
+      <DependentUpon>201601310926370_OptimizingPostersMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlogPost.cs" />
@@ -718,6 +722,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601280916174_BlogMigration.resx">
       <DependentUpon>201601280916174_BlogMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601310926370_OptimizingPostersMigration.resx">
+      <DependentUpon>201601310926370_OptimizingPostersMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -8,10 +8,24 @@
     <script type="text/javascript">
     $(document).ready(function () {
             $('#calendar').fullCalendar({
+                customButtons: {
+                    prevButton: {
+                        text: '<',
+                        click: function () {
+                            $('#calendar').fullCalendar('prev');
+                        }
+                    },
+                    nextButton: {
+                        text: '>',
+                        click: function () {
+                            $('#calendar').fullCalendar('next');
+                        }
+                    }
+                },
                 header: {
-                    left: 'prev,next today',
+                    left: 'prevButton nextButton',
                     center: 'title',
-                    right: 'month,basicWeek,basicDay'
+                    right: 'today prev, next'
                 },
                 firstDay:1,
                 monthNames: ["Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"],

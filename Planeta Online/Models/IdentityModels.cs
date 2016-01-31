@@ -40,7 +40,6 @@ namespace Planeta_Online.Models
         public DbSet<EventRegistration> EventRegistrations { get; set; }
         public DbSet<EventApplication> EventApplications { get; set; }
         public DbSet<Book> Books { get; set; }
-        public DbSet<EventPoster> Posters { get; set; }
         public DbSet<BlogPost> Blog { get; set; }
     }
 }

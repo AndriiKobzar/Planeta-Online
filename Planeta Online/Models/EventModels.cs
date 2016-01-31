@@ -43,8 +43,7 @@ namespace Planeta_Online.Models
         [DataType(DataType.DateTime)]
         public DateTime Till { get; set; }
 
-        //[Display(Name="Вкладення")]
-        //public string Attachments { get; set; }
+        public string PosterPath { get; set; }
     }
     public class EventViewModel
     {
@@ -191,16 +190,7 @@ namespace Planeta_Online.Models
         [Display(Name="Відвідувачі")]
         public int Visitors { get; set; }
     }
-    public class EventPoster
-    {
-        public int Id { get; set; }
-        public int EventId { get; set; }
-        public string PosterPath { get; set; }
-    }
-    public class PosterModel
-    {
-        public int id { get; set; }
-    }
+
     public class VisitorsViewModel
     {
         public string EventName { get; set; }

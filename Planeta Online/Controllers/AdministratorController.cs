@@ -174,14 +174,14 @@ namespace Planeta_Online.Controllers
         }
         public ActionResult GoToFilePicker(int? id)
         {
-            if (db.EventApplications.Find(id) != null) return View("AddPoster", new PosterModel() { id =(int)id });
+            if (db.EventApplications.Find(id) != null) return View("AddPoster", id);
             else return new HttpNotFoundResult();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddPoster(PosterModel model, HttpPostedFileBase fileUpload)
+        public ActionResult AddPoster(int id, HttpPostedFileBase fileUpload)
         {
-            EventApplication application = db.EventApplications.Find(model.id);
+            EventApplication application = db.EventApplications.Find(id);
             if(application==null)
             {
                 return new HttpNotFoundResult();
@@ -211,11 +211,6 @@ namespace Planeta_Online.Controllers
                     Description = application.Description,
                     From = application.From,
                     Till = application.Till,
-                });
-                db.SaveChanges();
-                db.Posters.Add(new EventPoster()
-                {
-                    EventId = e.Id,
                     PosterPath = path
                 });
                 db.SaveChanges();

@@ -1,4 +1,4 @@
-﻿@model Planeta_Online.Models.PosterModel
+﻿@model int
 @{
     ViewBag.Title = "AddPoster";
 }
@@ -7,7 +7,7 @@
 @using (Html.BeginForm("AddPoster", "Administrator", FormMethod.Post, new { enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model=>model.id)
+    @Html.Hidden("id", Model)
     <input type="file" name="fileUpload" value="Завантажити файл афіші"/>
     <input type="submit" name="file" class="btn btn-default" value="Опублікувати афішу" />
 }

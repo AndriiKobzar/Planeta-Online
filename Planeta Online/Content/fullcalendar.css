@@ -27,7 +27,18 @@ html .fc,
 	padding: 0;
 	vertical-align: top;
 	}
-
+/*.fc table > tbody > tr:nth-of-type(2n+1) > td:nth-of-type(2n+1) {
+    background-color: #4d4d4d;
+}
+.fc table > tbody > tr:nth-of-type(2n+2) > td:nth-of-type(2n+1) {
+    background-color: #424242;
+}
+.fc table > tbody > tr:nth-of-type(2n+1) > td:nth-of-type(2n+2) {
+    background-color: #474747;
+}
+.fc table > tbody > tr:nth-of-type(2n+2) > td:nth-of-type(2n+2) {
+    background-color: #4f4f4f;
+}*/
 /* Header
 ------------------------------------------------------------------------*/
 
@@ -124,7 +135,7 @@ html .fc,
 	background: #fcf8e3;
 	}
 .fc-today {
-    background-color: #343434;
+    background-color: #323232;
 }	
 .fc-cell-overlay { /* semi-transparent rectangle while dragging */
 	background: #bce8f1;
