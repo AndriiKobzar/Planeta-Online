@@ -34,6 +34,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -593,7 +597,10 @@
     <Content Include="ckeditor\ckeditor\plugins\wsc\README.md" />
     <Content Include="ckeditor\ckeditor\skins\moono\readme.md" />
     <None Include="Properties\PublishProfiles\planeta.pubxml" />
+    <None Include="Properties\PublishProfiles\planetahub - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\planetahub - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\planetahub - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\somee.pubxml" />
     <None Include="Properties\PublishProfiles\toFolder.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-1.11.3.intellisense.js" />

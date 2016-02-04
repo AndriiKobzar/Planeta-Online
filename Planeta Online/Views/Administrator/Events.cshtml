@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Planeta_Online.Models.EventViewModelForAdmin>
-
+@using Planeta_Online.Models
 @{
     ViewBag.Title = "Events";
 }
@@ -23,6 +23,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Visitors)
         </th>
+        <th>
+            Дії
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -41,6 +44,9 @@
         </td>
         <td>
             @Html.ActionLink(item.Visitors.ToString(), "Visitors", new { id = item.Id })
+        </td>
+        <td>
+            @Html.ActionLink("Додати до афіші", "GoToFilePicker", new { id = item.Id, type=PosterCandidateType.Event  })
         </td>
     </tr>
 }
