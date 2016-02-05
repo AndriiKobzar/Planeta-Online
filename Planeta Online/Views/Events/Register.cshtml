@@ -1,6 +1,6 @@
 ﻿@model Planeta_Online.Models.EventRegistrationViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Зареєструватись";
 }
 @Html.Partial("_EventPartial")
 <h2>Зареєструватись на @Html.DisplayFor(m=>m.EventName)</h2>
@@ -25,11 +25,11 @@
             </div>
         </div>
 
-        
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Зареєструватись" class="btn btn-default" />
+                <input type="submit" value="Зареєструватись" class="btn btn-block" />
             </div>
-       
+        </div>
     </div>
 }
 @section Scripts {

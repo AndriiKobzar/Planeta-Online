@@ -21,6 +21,9 @@
             @Html.DisplayNameFor(model => model.Till)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Visitors)
         </th>
         <th>
@@ -37,10 +40,10 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.From)
+            @item.From.ToString("dd.mm.yyyy H:mm")
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Till)
+            @item.Till.ToString("dd.mm.yyyy H:mm")
         </td>
         <td>
             @Html.ActionLink(item.Visitors.ToString(), "Visitors", new { id = item.Id })
