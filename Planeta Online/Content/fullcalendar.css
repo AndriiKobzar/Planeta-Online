@@ -19,7 +19,7 @@
 html .fc,
 .fc table {
 	font-size: 1em;
-    border:none;
+	border:none;
 	}
 /*for borders and styles in every cell*/	
 .fc td,
@@ -27,21 +27,24 @@ html .fc,
 	padding: 0;
 	vertical-align: top;
 	}
-/*.fc table > tbody > tr:nth-of-type(2n+1) > td:nth-of-type(2n+1) {
-    background-color: #4d4d4d;
+
+.fc-body table > tbody > tr:nth-of-type(2n+1) > td:nth-of-type(2n+1) {
+	background-color: #4d4d4d;
 }
-.fc table > tbody > tr:nth-of-type(2n+2) > td:nth-of-type(2n+1) {
-    background-color: #424242;
+.fc-body table > tbody > tr:nth-of-type(2n+2) > td:nth-of-type(2n+1) {
+	background-color: #424242;
 }
-.fc table > tbody > tr:nth-of-type(2n+1) > td:nth-of-type(2n+2) {
-    background-color: #474747;
+.fc-body table > tbody > tr:nth-of-type(2n+1) > td:nth-of-type(2n+2) {
+	background-color: #474747;
 }
-.fc table > tbody > tr:nth-of-type(2n+2) > td:nth-of-type(2n+2) {
-    background-color: #4f4f4f;
-}*/
+.fc-body³ table > tbody > tr:nth-of-type(2n+2) > td:nth-of-type(2n+2) {
+	background-color: #4f4f4f;
+}
 /* Header
 ------------------------------------------------------------------------*/
-
+.header{
+	background-color:transparent;
+}
 .fc-header td {
 	white-space: nowrap;
 	}
@@ -135,8 +138,8 @@ html .fc,
 	background: #fcf8e3;
 	}
 .fc-today {
-    background-color: #323232;
-    border-radius: 5px;
+	background-color: #323232;
+	border-radius: 5px;
 }	
 .fc-cell-overlay { /* semi-transparent rectangle while dragging */
 	background: #bce8f1;
@@ -241,8 +244,8 @@ html .fc,
 	background-position: 0 -15px;
 	-webkit-transition: background-position 0.1s linear;
 	   -moz-transition: background-position 0.1s linear;
-	     -o-transition: background-position 0.1s linear;
-	        transition: background-position 0.1s linear;
+		 -o-transition: background-position 0.1s linear;
+			transition: background-position 0.1s linear;
 	}
 
 .fc-state-down,
