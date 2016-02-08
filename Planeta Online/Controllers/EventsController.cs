@@ -12,7 +12,11 @@ namespace Planeta_Online.Controllers
         ApplicationDbContext db = new ApplicationDbContext(); 
         public ActionResult Index()
         {
-            var posters = from events in db.Events where events.PosterPath != null && events.Till > DateTime.Now select events;             
+            var posters = from events 
+                          in db.Events
+                          where events.PosterPath != null //&& events.Till > DateTime.Now
+                          orderby events.From descending
+                          select events;             
             return View(posters.ToList());
         }
         public ActionResult Details(int? id)

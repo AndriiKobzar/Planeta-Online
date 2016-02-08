@@ -1,43 +1,32 @@
-﻿@model Planeta_Online.Models.CalendarModel
-@{
-    ViewBag.Title = "Calendar";
+﻿@{
+    ViewBag.Title = "Календар";
 }
 @Html.Partial("_EventPartial")
+
 <div id='calendar'></div>
 @section scripts{
     <script type="text/javascript">
     $(document).ready(function () {
-            $('#calendar').fullCalendar({
-                customButtons: {
-                    prevButton: {
-                        text: '<',
-                        click: function () {
-                            $('#calendar').fullCalendar('prev');
-                        }
-                    },
-                    nextButton: {
-                        text: '>',
-                        click: function () {
-                            $('#calendar').fullCalendar('next');
-                        }
-                    }
-                },
-                header: {
-                    left: 'prevButton nextButton',
-                    center: 'title',
-                    right: 'today prev, next'
-                },
-                firstDay:1,
-                monthNames: ["Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"],
-                monthNamesShort: ['Січ', 'Лют', 'Бер', 'Кві', 'Тра', 'Чер', 'Лип', 'Сер', 'Вер', 'Жов', 'Лис', 'Гру'],
-                dayNames: ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'П\'ятниця', 'Субота'],
-                dayNamesShort: ['Нд', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
-                eventLimit: true,
-                theme: true,
-                //defaultView: 'agendaDay',
-                editable: false,
-                events: "/events/getevents"
-            });
+        $('#calendar').fullCalendar({
+            header: {
+                left: '',
+                center: 'title',
+                right: 'today prev, next'
+            },
+            firstDay: 1,
+            monthNames: ["Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"],
+            monthNamesShort: ['Січ', 'Лют', 'Бер', 'Кві', 'Тра', 'Чер', 'Лип', 'Сер', 'Вер', 'Жов', 'Лис', 'Гру'],
+            dayNames: ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'П\'ятниця', 'Субота'],
+            dayNamesShort: ['Нд', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+            eventLimit: true,
+            theme: true,
+            //defaultView: 'agendaDay',
+            editable: false,
+            events: "/events/getevents"
         });
+        $('#calendar').find('.fc-header-left').append('<div align="center"><button id="previous" class="btn btn-default"><</button><button id="next" class="btn btn-default">></button></div>');
+        $('#previous').click(function () { $('#calendar').fullCalendar('prev'); });
+        $('#next').click(function () { $('#calendar').fullCalendar('next'); });
+    });
     </script>
 }

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="~/Content/Site.css" />
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/fullcalendarcss")
-    <link href="~/Content/fullcalendar.print.css" media="print" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
 
     <script src="~/ckeditor/ckeditor/ckeditor.js" type="text/javascript"></script>
@@ -21,46 +20,47 @@
             m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'UA-72119939-1', 'auto');
-        ga('send', 'pageview');
+ga('create', 'UA-72119939-1', 'auto');
+ga('send', 'pageview');
 
     </script>
 </head>
 <body>
     <div class="wrapper">
         <div class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Planeta Hub", "Index", "Events", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Planeta Hub", "Index", "Events", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
                 <div class="navbar-collapse collapse"  width="100%">
-                    <ul class="nav navbar-nav" width="100%">
-                        <li>@Html.ActionLink("Заходи", "Index", "Events")</li>
+                <ul class="nav navbar-nav" width="100%">
+                    <li>@Html.ActionLink("Заходи", "Index", "Events")</li>                                                      
                         <li><img src="~/Content/circle.png" height="7px"/></li>
-                        <li>@Html.ActionLink("Книги", "Index", "Books")</li>
+                    <li>@Html.ActionLink("Книги", "Index", "Books")</li>
                         <li><img src="~/Content/circle.png" height="7px"/></li>
-                        <li>@Html.ActionLink("Про Планету", "About", "Home")</li>
+                    <li>@Html.ActionLink("Про Планету", "About", "Home")</li>
                         <li><img src="~/Content/circle.png" height="7px"/></li>
-                        <li>@Html.ActionLink("Блог", "Index", "Blog")</li>
+                    <li>@Html.ActionLink("Блог", "Index", "Blog")</li>
                         @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
-                        {
+                    {
                             <li><img src="~/Content/circle.png" height="7px"/></li>
-                            <li>@Html.ActionLink("Адміністратор", "Index", "Administrator")</li>
-                        }
-                    </ul>
-                    @Html.Partial("_LoginPartial")
-                </div>
+                        <li>@Html.ActionLink("Адміністратор", "Index", "Administrator")</li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        &copy; Planeta Hub - @DateTime.Now.Year
+   </div>
     </div>
     <footer>
         <div class="container">
@@ -73,9 +73,8 @@
     </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/fullcalendarjs")
+    
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-
-
 </body>
 </html>

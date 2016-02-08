@@ -65,7 +65,6 @@ namespace Planeta_Online.Controllers
         }
         public ActionResult DeleteEvent(int id)
         {
-
             db.EventApplications.Remove(db.EventApplications.Find(id));
             db.SaveChanges();
             return RedirectToAction("SubmittedEvents");
@@ -172,22 +171,56 @@ namespace Planeta_Online.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
-        public ActionResult GoToFilePicker(int? id)
+        public ActionResult GoToFilePicker(PosterModel model)
         {
-            if (db.EventApplications.Find(id) != null) return View("AddPoster", id);
+            if (model.Type == PosterCandidateType.Application && db.EventApplications.Find(model.Id) != null) return View("AddPoster", model);
+            else if (model.Type == PosterCandidateType.Event && db.Events.Find(model.Id) != null) return View("AddPoster", model);
             else return new HttpNotFoundResult();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddPoster(int id, HttpPostedFileBase fileUpload)
+        public ActionResult AddPoster(PosterModel model, HttpPostedFileBase fileUpload)
         {
-            EventApplication application = db.EventApplications.Find(id);
-            if(application==null)
+            if (model.Type == PosterCandidateType.Application)
             {
-                return new HttpNotFoundResult();
+                EventApplication application = db.EventApplications.Find(model.Id);
+                if (application == null)
+                {
+                    return new HttpNotFoundResult();
+                }
+                else
+                {
+                    var path = "";
+                    if (Request.Files.Count > 0)
+                    {
+                        var file = Request.Files[0];
+
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            path = Path.Combine(Server.MapPath("~/Posters/"), fileName);
+                            file.SaveAs(path);
+                            path = "/Posters/" + fileName;
+                        }
+                    }
+                    db.EventApplications.Remove(application);
+                    Event e = db.Events.Add(new Event()
+                    {
+                        Name = application.Name,
+                        CreatorEmail = application.CreatorEmail,
+                        CreatorName = application.CreatorName,
+                        CreatorPhone = application.CreatorPhone,
+                        Description = application.Description,
+                        From = application.From,
+                        Till = application.Till,
+                        PosterPath = path
+                    });
+                    db.SaveChanges();
+                }              
             }
             else
             {
+                var entry = db.Events.Find(model.Id);
                 var path = "";
                 if (Request.Files.Count > 0)
                 {
@@ -201,18 +234,8 @@ namespace Planeta_Online.Controllers
                         path = "/Posters/" + fileName;
                     }
                 }
-                db.EventApplications.Remove(application);
-                Event e = db.Events.Add(new Event()
-                {
-                    Name = application.Name,
-                    CreatorEmail = application.CreatorEmail,
-                    CreatorName = application.CreatorName,
-                    CreatorPhone = application.CreatorPhone,
-                    Description = application.Description,
-                    From = application.From,
-                    Till = application.Till,
-                    PosterPath = path
-                });
+                entry.PosterPath = path;
+                db.Entry(entry).State = EntityState.Modified;
                 db.SaveChanges();
             }
             return RedirectToAction("Index");
