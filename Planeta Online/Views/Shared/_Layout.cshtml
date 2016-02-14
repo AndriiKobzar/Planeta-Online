@@ -20,60 +20,73 @@
             m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-ga('create', 'UA-72119939-1', 'auto');
-ga('send', 'pageview');
+        ga('create', 'UA-72119939-1', 'auto');
+        ga('send', 'pageview');
 
     </script>
 </head>
 <body>
     <div class="wrapper">
         <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Planeta Hub", "Index", "Events", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-                <div class="navbar-collapse collapse"  width="100%">
-                <ul class="nav navbar-nav" width="100%">
-                    <li>@Html.ActionLink("Заходи", "Index", "Events")</li>                                                      
-                        <li><img src="~/Content/circle.png" height="7px"/></li>
-                    <li>@Html.ActionLink("Книги", "Index", "Books")</li>
-                        <li><img src="~/Content/circle.png" height="7px"/></li>
-                    <li>@Html.ActionLink("Про Планету", "About", "Home")</li>
-                        <li><img src="~/Content/circle.png" height="7px"/></li>
-                    <li>@Html.ActionLink("Блог", "Index", "Blog")</li>
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Planeta Hub", "Index", "Events", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse" width="100%">
+                    <ul class="nav navbar-nav" width="100%">
+                        <li>@Html.ActionLink("Заходи", "Index", "Events")</li>
+                        <li class="hidden-xs hidden-sm"><img img class="nav-img" src="~/Content/circle.png" /></li>
+                        <li>@Html.ActionLink("Книги", "Index", "Books")</li>
+                        <li class="hidden-xs hidden-sm"><img img class="nav-img" src="~/Content/circle.png" /></li>
+                        <li>@Html.ActionLink("Про Планету", "About", "Home")</li>
+                        <li class="hidden-xs hidden-sm"><img img class="nav-img" src="~/Content/circle.png" " /></li>
+                        <li>@Html.ActionLink("Блог", "Index", "Blog")</li>
                         @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
-                    {
-                            <li><img src="~/Content/circle.png" height="7px"/></li>
-                        <li>@Html.ActionLink("Адміністратор", "Index", "Administrator")</li>
-                    }
-                </ul>
-                @Html.Partial("_LoginPartial")
+                        {
+                            <li class="hidden-xs hidden-sm"><img img class="nav-img" src="~/Content/circle.png" /></li>
+                            <li>@Html.ActionLink("Адміністратор", "Index", "Administrator")</li>
+                        }
+                        <li>@Html.Partial("_LoginPartial")</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        &copy; Planeta Hub - @DateTime.Now.Year
-   </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+        </div>
     </div>
     <footer>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-2">
-                    <h5> PlanetaHub &copy;</h5>
-                </div>
+            <div class="col-lg-2">
+                <h5>&copy; Planeta Hub - @DateTime.Now.Year</h5>
+            </div>
+            <div class="col-lg-3">
+                <ul>
+                    <li>@Html.ActionLink("Заходи", "Index", "Events")</li>
+                    <li>@Html.ActionLink("Створити захід", "Create", "Events")</li>
+                    <li>@Html.ActionLink("Календар", "Calendar", "Events")</li>
+                </ul>
+            </div>
+            <div class="col-lg-2">
+                @Html.ActionLink("Книги", "Index", "Books")
+            </div>
+            <div class="col-lg-2">
+                @Html.ActionLink("Про Планету", "About", "Home")
+            </div>
+            <div class="col-lg-2">
+                @Html.ActionLink("Блог", "Index", "Blog")
             </div>
         </div>
     </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/fullcalendarjs")
-    
+
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
