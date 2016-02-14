@@ -84,7 +84,8 @@ namespace Planeta_Online.Controllers
         }
         public ActionResult Register(int id)
         {
-            EventRegistrationViewModel model = new EventRegistrationViewModel() { EventName = db.Events.Find(id).Name, EventId = id };
+            var _event = db.Events.Find(id);
+            EventRegistrationViewModel model = new EventRegistrationViewModel() { EventName = _event.Name, EventId = id, PosterPath = _event.PosterPath};
             return View(model);
         }
         [HttpPost]

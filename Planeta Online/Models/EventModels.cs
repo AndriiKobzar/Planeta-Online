@@ -84,6 +84,7 @@ namespace Planeta_Online.Models
 
         public int EventId { get; set; }
         public string EventName { get; set; }
+        public string PosterPath { get; set; }
     }
     public class EventApplication
     {

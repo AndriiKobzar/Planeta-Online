@@ -28,7 +28,11 @@ namespace Planeta_Online.Controllers
             List<EventViewModelForAdmin> events = new List<EventViewModelForAdmin>();
             foreach(Event _event in db.Events.ToList())
             {
-                EventViewModelForAdmin model = new EventViewModelForAdmin() { Description = _event.Description, From = _event.From, Till = _event.Till, Name = _event.Name, Id=_event.Id };
+                EventViewModelForAdmin model = new EventViewModelForAdmin() { Description = _event.Description,
+                                                                              From = _event.From,
+                                                                              Till = _event.Till,
+                                                                              Name = _event.Name,
+                                                                              Id =_event.Id };
                 // make a query to select visitors for this event
                 var query = from entry in db.EventRegistrations where entry.EventId == _event.Id select entry;
                 query = db.EventRegistrations.Where(m => m.EventId == _event.Id);
