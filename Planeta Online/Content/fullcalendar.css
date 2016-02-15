@@ -138,7 +138,7 @@ html .fc,
 	background: #fcf8e3;
 	}
 .fc-today {
-	background-color: #323232;
+	background-color: #d4d5d0;
 	border-radius: 5px;
 }	
 .fc-cell-overlay { /* semi-transparent rectangle while dragging */
