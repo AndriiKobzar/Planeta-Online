@@ -1,29 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "Admin";
+    ViewBag.Title = "Адміністратор";
 }
 
 <h2>Сторінка адміністратора</h2>
 <h3>Доступні дії:</h3>
-<div class="form-group">
-    <div class="col-md-12">
-        <input class="btn btn-default" type="button" title="Список книг" value="Каталог книг" onclick="location.href='@Url.Action("Books", "Administrator")'" />
-    </div>
-</div>
-<br/>
-<div class="form-group">
-    <div class="col-md-12">
-        <input class="btn btn-default" type="button" value="Заявки" onclick="location.href='@Url.Action("SubmittedEvents", "Administrator")'" />
-    </div>
-</div>
-<br/>
-<div class="form-group">
-    <div class="col-md-12">
-        <input class="btn btn-default" type="button" value="Події" onclick="location.href='@Url.Action("Events", "Administrator")'" />
-    </div>
-</div>
-<div class="form-group">
-    <div class="col-md-12">
-        <input class="btn btn-default" type="button" value="Блог" onclick="location.href='@Url.Action("Blog", "Administrator")'" />
-    </div>
-</div>
+@Html.ActionLink("Заявки", "SubmittedEvents", new { }, new { @class = "btn btn-default" })<br /><br />
+@Html.ActionLink("Події", "Events", new { }, new { @class = "btn btn-default" })<br /><br />
+@Html.ActionLink("Книги", "Books", new { }, new { @class = "btn btn-default" })<br /><br />
+@Html.ActionLink("Блог", "Blog", new { }, new { @class = "btn btn-default" })<br /><br />

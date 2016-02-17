@@ -1,7 +1,7 @@
 ﻿@model Planeta_Online.Models.Event
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Деталі";
 }
 @Html.Partial("_EventPartial")
 <h2>@Model.Name</h2>
@@ -27,18 +27,18 @@
             @Html.DisplayNameFor(model => model.From)
         </dt>
         <dd>
-            @Model.From.ToString("dd.mm.yyyy H:mm")
+            @Model.From.ToString("dd.MM.yyyy H:mm")
         </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Till)
         </dt>
         <dd>
-            @Model.Till.ToString("dd.mm.yyyy H:mm")
+            @Model.Till.ToString("dd.MM.yyyy H:mm")
         </dd>
 
     </dl>
 </div>
 <p>
-    <input type="button" class="btn btn-block" value="Зареєструватися" onclick="location.href='@Url.Action("Register", "Events", new { id=Model.Id })'" />
+    @Html.ActionLink("Зареєструватися", "Register", new { id = Model.Id }, new { @class = "btn btn-default" });
 </p>

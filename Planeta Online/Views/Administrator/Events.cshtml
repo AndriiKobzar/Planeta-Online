@@ -37,10 +37,10 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @item.From.ToString("dd.mm.yyyy H:mm")
+            @item.From.ToString("dd.MM.yyyy H:mm")
         </td>
         <td>
-            @item.Till.ToString("dd.mm.yyyy H:mm")
+            @item.Till.ToString("dd.MM.yyyy H:mm")
         </td>
         <td>
             @Html.ActionLink(item.Visitors.ToString(), "Visitors", new { id = item.Id })

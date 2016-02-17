@@ -27,19 +27,19 @@ html .fc,
 	padding: 0;
 	vertical-align: top;
 	}
-
-.fc-body table > tbody > tr:nth-of-type(2n+1) > td:nth-of-type(2n+1) {
-	background-color: #4d4d4d;
+/*for styling calendar grid*/
+/*.fc-grid tr:nth-of-type(2n+1) > td:nth-of-type(2n+1) {
+	background-color: antiquewhite;
 }
-.fc-body table > tbody > tr:nth-of-type(2n+2) > td:nth-of-type(2n+1) {
-	background-color: #424242;
+.fc-grid tr:nth-of-type(2n+2) > td:nth-of-type(2n+1) {
+	background-color: aliceblue;
 }
-.fc-body table > tbody > tr:nth-of-type(2n+1) > td:nth-of-type(2n+2) {
-	background-color: #474747;
+.fc-grid tr:nth-of-type(2n+1) > td:nth-of-type(2n+2) {
+	background-color: azure;
 }
-.fc-body³ table > tbody > tr:nth-of-type(2n+2) > td:nth-of-type(2n+2) {
-	background-color: #4f4f4f;
-}
+.fc-grid tr:nth-of-type(2n+2) > td:nth-of-type(2n+2) {
+	background-color: beige;
+}*/
 /* Header
 ------------------------------------------------------------------------*/
 .header{
@@ -131,7 +131,7 @@ html .fc,
 
 .fc-widget-header,    /* <th>, usually */
 .fc-widget-content {  /* <td>, usually */
-	border: 1px solid #ffffff;
+	border: 1px solid #000000;
 	}
 	
 .fc-state-highlight { /* <td> today cell */ /* TODO: add .fc-today to <th> */
