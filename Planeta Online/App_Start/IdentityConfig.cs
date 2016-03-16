@@ -12,6 +12,8 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Planeta_Online.Models;
 using System.Web.Helpers;
+using System.Net.Mail;
+using System.Net;
 
 namespace Planeta_Online
 {
@@ -19,8 +21,19 @@ namespace Planeta_Online
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // This code should actually go into the _AppStart.cshtml file.
-            
+            MailMessage mail = new MailMessage("planeta.workspace@gmail.com", message.Destination);
+            mail.IsBodyHtml = true;
+            mail.Body = message.Body;
+            mail.Subject = message.Subject;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.EnableSsl = true;
+            smtp.Port = 587;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.UseDefaultCredentials = false;
+            NetworkCredential networkCredential = new NetworkCredential("planeta.workspace@gmail.com", "planetahub");
+            smtp.Credentials = networkCredential;
+            smtp.Send(mail);
             return Task.FromResult(0);
         }
     }

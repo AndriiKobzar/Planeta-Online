@@ -65,28 +65,20 @@ namespace Planeta_Online.Models
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage="Неправильний формат пошти")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} мусить мати щонайменше {2} символи", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Пароль")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Підтвердіть пароль")]
+        [Compare("Password", ErrorMessage = "Паролі не збігаються")]
         public string ConfirmPassword { get; set; }
-        [Required]
-        public string Gender { get; set; }
-        [Required]
-        public int Age { get; set; }
-        public string Specialization { get; set; }
-        [Required]
-        [Display(Name = "Name")]
-        public string DisplayName { get; set; }
     }
 
     public class ResetPasswordViewModel

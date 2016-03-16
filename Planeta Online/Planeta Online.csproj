@@ -208,67 +208,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510041922153_Initial.cs" />
-    <Compile Include="Migrations\201510041922153_Initial.Designer.cs">
-      <DependentUpon>201510041922153_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510091910062_Attachments.cs" />
-    <Compile Include="Migrations\201510091910062_Attachments.Designer.cs">
-      <DependentUpon>201510091910062_Attachments.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510110858160_EventRegistration.cs" />
-    <Compile Include="Migrations\201510110858160_EventRegistration.Designer.cs">
-      <DependentUpon>201510110858160_EventRegistration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510111815344_EventApplication.cs" />
-    <Compile Include="Migrations\201510111815344_EventApplication.Designer.cs">
-      <DependentUpon>201510111815344_EventApplication.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510111849092_AddAttachmnts.cs" />
-    <Compile Include="Migrations\201510111849092_AddAttachmnts.Designer.cs">
-      <DependentUpon>201510111849092_AddAttachmnts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510111933297_RemoveLecturer.cs" />
-    <Compile Include="Migrations\201510111933297_RemoveLecturer.Designer.cs">
-      <DependentUpon>201510111933297_RemoveLecturer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510141045279_Renaming.cs" />
-    <Compile Include="Migrations\201510141045279_Renaming.Designer.cs">
-      <DependentUpon>201510141045279_Renaming.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510251007347_AddTillTime.cs" />
-    <Compile Include="Migrations\201510251007347_AddTillTime.Designer.cs">
-      <DependentUpon>201510251007347_AddTillTime.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511101855213_CreatorInfo.cs" />
-    <Compile Include="Migrations\201511101855213_CreatorInfo.Designer.cs">
-      <DependentUpon>201511101855213_CreatorInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511151058450_AddDisplayName.cs" />
-    <Compile Include="Migrations\201511151058450_AddDisplayName.Designer.cs">
-      <DependentUpon>201511151058450_AddDisplayName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601051728367_PostersMigration.cs" />
-    <Compile Include="Migrations\201601051728367_PostersMigration.Designer.cs">
-      <DependentUpon>201601051728367_PostersMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601061323261_UpdatePoster.cs" />
-    <Compile Include="Migrations\201601061323261_UpdatePoster.Designer.cs">
-      <DependentUpon>201601061323261_UpdatePoster.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601280916174_BlogMigration.cs" />
-    <Compile Include="Migrations\201601280916174_BlogMigration.Designer.cs">
-      <DependentUpon>201601280916174_BlogMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601310926370_OptimizingPostersMigration.cs" />
-    <Compile Include="Migrations\201601310926370_OptimizingPostersMigration.Designer.cs">
-      <DependentUpon>201601310926370_OptimizingPostersMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201602291721335_AzureInit.cs" />
+    <Compile Include="Migrations\201602291721335_AzureInit.Designer.cs">
+      <DependentUpon>201602291721335_AzureInit.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlogPost.cs" />
     <Compile Include="Models\BookModels.cs" />
     <Compile Include="Models\Calendar.cs" />
+    <Compile Include="Models\EmailDeliveryModel.cs" />
     <Compile Include="Models\EventModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -600,9 +549,12 @@
     <Content Include="ckeditor\ckeditor\skins\moono\readme.md" />
     <Content Include="Content\variables.less" />
     <None Include="Properties\PublishProfiles\planeta.pubxml" />
+    <None Include="Properties\PublishProfiles\planetahub - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\planetahub - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\planetahub - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\planetahub - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\planetahub - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\planetahub.pubxml" />
     <None Include="Properties\PublishProfiles\somee.pubxml" />
     <None Include="Properties\PublishProfiles\toFolder.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -685,6 +637,7 @@
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Administrator\DeletePost.cshtml" />
     <Content Include="Views\Administrator\CreatePost.cshtml" />
+    <Content Include="Views\Administrator\EmailDelivery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -693,49 +646,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510041922153_Initial.resx">
-      <DependentUpon>201510041922153_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510091910062_Attachments.resx">
-      <DependentUpon>201510091910062_Attachments.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510110858160_EventRegistration.resx">
-      <DependentUpon>201510110858160_EventRegistration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510111815344_EventApplication.resx">
-      <DependentUpon>201510111815344_EventApplication.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510111849092_AddAttachmnts.resx">
-      <DependentUpon>201510111849092_AddAttachmnts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510111933297_RemoveLecturer.resx">
-      <DependentUpon>201510111933297_RemoveLecturer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510141045279_Renaming.resx">
-      <DependentUpon>201510141045279_Renaming.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510251007347_AddTillTime.resx">
-      <DependentUpon>201510251007347_AddTillTime.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511101855213_CreatorInfo.resx">
-      <DependentUpon>201511101855213_CreatorInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511151058450_AddDisplayName.resx">
-      <DependentUpon>201511151058450_AddDisplayName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601051728367_PostersMigration.resx">
-      <DependentUpon>201601051728367_PostersMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601061323261_UpdatePoster.resx">
-      <DependentUpon>201601061323261_UpdatePoster.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601280916174_BlogMigration.resx">
-      <DependentUpon>201601280916174_BlogMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601310926370_OptimizingPostersMigration.resx">
-      <DependentUpon>201601310926370_OptimizingPostersMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602291721335_AzureInit.resx">
+      <DependentUpon>201602291721335_AzureInit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

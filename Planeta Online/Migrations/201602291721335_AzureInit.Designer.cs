@@ -7,13 +7,13 @@ namespace Planeta_Online.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class BlogMigration : IMigrationMetadata
+    public sealed partial class AzureInit : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(BlogMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AzureInit));
         
         string IMigrationMetadata.Id
         {
-            get { return "201601280916174_BlogMigration"; }
+            get { return "201602291721335_AzureInit"; }
         }
         
         string IMigrationMetadata.Source

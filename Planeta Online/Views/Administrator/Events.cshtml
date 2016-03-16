@@ -46,7 +46,8 @@
             @Html.ActionLink(item.Visitors.ToString(), "Visitors", new { id = item.Id })
         </td>
         <td>
-            @Html.ActionLink("Додати до афіші", "GoToFilePicker", new { id = item.Id, type=PosterCandidateType.Event  })
+            @Html.ActionLink("Додати до афіші", "GoToFilePicker", new { id = item.Id, type=PosterCandidateType.Event  })|
+            @Html.ActionLink("Розсилка", "EmailDelivery", new { id = item.Id })
         </td>
     </tr>
 }

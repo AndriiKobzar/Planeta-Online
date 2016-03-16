@@ -2956,8 +2956,8 @@ th {
 .table-striped > tbody > tr:nth-of-type(odd) {
     background-color: #f9f9f9;
 }
-.table > tbody > tr:nth-of-type(odd) {
-    background-color: #3c763d;
+.table > tbody > tr:nth-of-type(odd) { 
+    background-color: #337ab7;
 }
 .table-hover > tbody > tr:hover {
     background-color: #f5f5f5;
@@ -8565,6 +8565,7 @@ a.list-group-item-danger.active {
 footer {
     padding: 20px;
     background: #333;
+    margin-top:50px;
     margin-bottom: -20px;
     text-align: left;
 }

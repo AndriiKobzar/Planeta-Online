@@ -7,19 +7,18 @@
 <h2>Заходи</h2>
 
 
-<table width="100%">
+@*<table width="100%">*@
     @for(int i = 0; i < Math.Ceiling((double)Model.Count() / 3); i++)
     {
-        <tr>
-            @for (int j = i * 3; j < (i + 1) * 3 && j < Model.Count(); j++)
+        @*<tr>*@
+            for (int j = i * 3; j < (i + 1) * 3 && j < Model.Count(); j++)
             {
-                <td>
-                    <div class="col col-lg-4">
-                        <br />
+                @*<td>*@
+                    <div class="col col-lg-4" style="margin-bottom:10px">                
                         <a href="~/Events/Details/@Model.ElementAt(j).Id"><img src="@Model.ElementAt(j).PosterPath" width="300" height="400" alt="@Model.ElementAt(j).Name"></a>
                     </div>
-                </td>
+                @*</td>*@
             }           
-        </tr>
-    }
-</table>
+        @*</tr>*@
+        }
+    @*</table>*@

@@ -91,9 +91,21 @@ namespace Planeta_Online.Controllers
         [HttpPost]
         public ActionResult Register(EventRegistrationViewModel model)
         {
-            db.EventRegistrations.Add(new EventRegistration() { EventId = model.EventId, VisitorEmail = model.VisitorEmail, VisitorName = model.VisitorName });
-            db.SaveChanges();
-            return View("Success");
+            var probableVisitor = from visitor 
+                                  in db.EventRegistrations
+                                  where visitor.EventId==model.EventId && visitor.VisitorEmail == model.VisitorEmail
+                                  select visitor;
+            if (probableVisitor.Count() == 0)
+            {
+                db.EventRegistrations.Add(new EventRegistration() { EventId = model.EventId, VisitorEmail = model.VisitorEmail, VisitorName = model.VisitorName });
+                db.SaveChanges();
+                return View("Success");
+            }
+            else
+            {
+                ModelState.AddModelError("VisitorEmail", "Людина з такою поштою вже зареєструвалась на подію");
+                return View(model);
+            }
         }
         public ActionResult Calendar()
         {

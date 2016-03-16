@@ -3,10 +3,21 @@ namespace Planeta_Online.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class AzureInit : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.BlogPosts",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        TimeStamp = c.DateTime(nullable: false),
+                        Title = c.String(nullable: false),
+                        Text = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
             CreateTable(
                 "dbo.Books",
                 c => new
@@ -19,12 +30,29 @@ namespace Planeta_Online.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.EventApplications",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                        Description = c.String(nullable: false),
+                        From = c.DateTime(nullable: false),
+                        Till = c.DateTime(nullable: false),
+                        CreatorEmail = c.String(nullable: false),
+                        CreatorName = c.String(nullable: false),
+                        CreatorPhone = c.String(nullable: false),
+                        Attachments = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.EventRegistrations",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         EventId = c.Int(nullable: false),
-                        UserId = c.String(),
+                        VisitorName = c.String(),
+                        VisitorEmail = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -33,12 +61,39 @@ namespace Planeta_Online.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        CreatorEmail = c.String(nullable: false),
+                        CreatorName = c.String(nullable: false),
+                        CreatorPhone = c.String(nullable: false),
                         Name = c.String(),
                         Description = c.String(),
-                        Lecturer = c.String(),
-                        Time = c.DateTime(nullable: false),
+                        From = c.DateTime(nullable: false),
+                        Till = c.DateTime(nullable: false),
+                        PosterPath = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.AspNetRoles",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
+            CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -49,6 +104,7 @@ namespace Planeta_Online.Migrations
                         Age = c.Int(nullable: false),
                         Specialization = c.String(),
                         IsMember = c.Boolean(nullable: false),
+                        DisplayName = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -60,12 +116,9 @@ namespace Planeta_Online.Migrations
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
-                        Event_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Events", t => t.Event_Id)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex")
-                .Index(t => t.Event_Id);
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
             CreateTable(
                 "dbo.AspNetUserClaims",
@@ -92,53 +145,30 @@ namespace Planeta_Online.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
-            CreateTable(
-                "dbo.AspNetUserRoles",
-                c => new
-                    {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
-            
-            CreateTable(
-                "dbo.AspNetRoles",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.AspNetUsers", "Event_Id", "dbo.Events");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
-            DropIndex("dbo.AspNetUsers", new[] { "Event_Id" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropTable("dbo.AspNetRoles");
-            DropTable("dbo.AspNetUserRoles");
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.AspNetRoles");
             DropTable("dbo.Events");
             DropTable("dbo.EventRegistrations");
+            DropTable("dbo.EventApplications");
             DropTable("dbo.Books");
+            DropTable("dbo.BlogPosts");
         }
     }
 }

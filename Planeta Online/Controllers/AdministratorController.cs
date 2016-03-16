@@ -10,10 +10,12 @@ using System.IO;
 using System.Data.Entity;
 using System.Net;
 using System.Data.Entity.Validation;
+using System.Net.Mail;
+using Microsoft.AspNet.Identity;
 
 namespace Planeta_Online.Controllers
 {
-    [Authorize(Roles="SuperAdmin")]
+    [Authorize(Roles = "SuperAdmin")]
     public class AdministratorController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
@@ -26,13 +28,16 @@ namespace Planeta_Online.Controllers
         public ActionResult Events()
         {
             List<EventViewModelForAdmin> events = new List<EventViewModelForAdmin>();
-            foreach(Event _event in db.Events.ToList())
+            foreach (Event _event in db.Events.ToList())
             {
-                EventViewModelForAdmin model = new EventViewModelForAdmin() { Description = _event.Description,
-                                                                              From = _event.From,
-                                                                              Till = _event.Till,
-                                                                              Name = _event.Name,
-                                                                              Id =_event.Id };
+                EventViewModelForAdmin model = new EventViewModelForAdmin()
+                {
+                    Description = _event.Description,
+                    From = _event.From,
+                    Till = _event.Till,
+                    Name = _event.Name,
+                    Id = _event.Id
+                };
                 // make a query to select visitors for this event
                 var query = from entry in db.EventRegistrations where entry.EventId == _event.Id select entry;
                 query = db.EventRegistrations.Where(m => m.EventId == _event.Id);
@@ -48,24 +53,27 @@ namespace Planeta_Online.Controllers
         public ActionResult Confirm(int id)
         {
             EventApplication application = db.EventApplications.Find(id);
-            if(application==null)
+            if (application == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest); 
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             else
             {
                 db.EventApplications.Remove(application);
-                db.Events.Add(new Event() { Name=application.Name,
-                                            From=application.From,
-                                            Till=application.Till,
-                                            Description=application.Description,
-                                            CreatorEmail = application.CreatorEmail, 
-                                            CreatorName = application.CreatorName, 
-                                            CreatorPhone = application.CreatorPhone});
+                db.Events.Add(new Event()
+                {
+                    Name = application.Name,
+                    From = application.From,
+                    Till = application.Till,
+                    Description = application.Description,
+                    CreatorEmail = application.CreatorEmail,
+                    CreatorName = application.CreatorName,
+                    CreatorPhone = application.CreatorPhone
+                });
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            
+
         }
         public ActionResult DeleteEvent(int id)
         {
@@ -77,27 +85,66 @@ namespace Planeta_Online.Controllers
         {
             EventApplication _event = db.EventApplications.Find(id);
             string filepath = GeneratePDF(_event);
-            //string from = "planeta.workspace@gmail.com";
-            //using (MailMessage mail = new MailMessage(from, "andrykobzar@gmail.com"))
-            //{
-            //    mail.Subject = "";
-            //    mail.Body = "";
-            //    FileStream inputStream = new FileStream(filepath, FileMode.Open);
-            //    mail.Attachments.Add(new Attachment(inputStream, filepath));
-            //    mail.IsBodyHtml = false;
-            //    SmtpClient smtp = new SmtpClient();
-            //    smtp.Host = "smtp.gmail.com";
-            //    smtp.EnableSsl = true;
-            //    smtp.Port = 25;
-            //    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            //    smtp.UseDefaultCredentials = false;
-            //    NetworkCredential networkCredential = new NetworkCredential(from, "planetahub");
-            //    smtp.Credentials = networkCredential;
-            //    smtp.Send(mail);
-            //}
             byte[] fileBytes = System.IO.File.ReadAllBytes(filepath);
-            string fileName = _event.Name+"_Podannya.pdf";
+            string fileName = _event.Name + "_Podannya.pdf";
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+        public ActionResult EmailDelivery(int id)
+        {
+            var _event = db.Events.Find(id);
+            if (_event != null)
+            {
+                EmailDeliveryModel model = new EmailDeliveryModel() { EventId = id, EventName=_event.Name };
+                return View(model);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
+        }
+        [HttpPost]
+        public ActionResult EmailDelivery(EmailDeliveryModel model)
+        {
+            var visitorslist = (from visitors 
+                                in db.EventRegistrations
+                                where visitors.EventId == model.EventId
+                                select visitors).ToList();
+            foreach (var visitor in visitorslist)
+            {           
+                try
+                {
+                    string from = "planeta.workspace@gmail.com";
+                    using (MailMessage mail = new MailMessage(from, visitor.VisitorEmail))
+                    {
+                        IdentityMessage message = new IdentityMessage();
+                        message.Subject = model.Head;
+                        message.Body = model.Body.Replace("<ім'я>", visitor.VisitorName);
+                        message.Destination = visitor.VisitorEmail;
+                        
+                        mail.IsBodyHtml = true;
+                        mail.Body = message.Body;
+                        mail.Subject = message.Subject;
+                        SmtpClient smtp = new SmtpClient();
+                        smtp.Host = "smtp.gmail.com";
+                        smtp.EnableSsl = true;
+                        smtp.Port = 587;
+                        smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        smtp.UseDefaultCredentials = false;
+                        NetworkCredential networkCredential = new NetworkCredential("planeta.workspace@gmail.com", "planetahub");
+                        smtp.Credentials = networkCredential;
+                        smtp.Send(mail);
+                        //EmailService service = new EmailService();
+                        //service.SendAsync(message);
+                        
+                    }
+                }
+                catch(Exception e)
+                {
+
+                }
+                db.SaveChanges();
+            }
+            return RedirectToAction("Events");
         }
         // returns a path to pdf application for this event
         private string GeneratePDF(EventApplication @event)
@@ -129,7 +176,7 @@ namespace Planeta_Online.Controllers
 
             document.Add(new Paragraph("\n\nПодання\n\n", normal) { Alignment = 1 });
 
-            string text = string.Format("Просимо дозволу провести {0} у диско-клубі \"Планета\" з {1:dd.mm.yyyy hh:mm} по {2:dd.mm.yyyy hh:mm}", @event.Name, @event.From, @event.Till);
+            string text = string.Format("Просимо дозволу провести {0} у диско-клубі \"Планета\" з {1:dd.MM.yyyy hh:mm} по {2:dd.MM.yyyy hh:mm}", @event.Name, @event.From, @event.Till);
             Paragraph body = new Paragraph(text, normal);
             document.Add(body);
 
@@ -153,18 +200,18 @@ namespace Planeta_Online.Controllers
         }
         public ActionResult Visitors(int? id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Event @event = db.Events.Find(id);
-            if(@event!=null)
+            if (@event != null)
             {
                 var model = new VisitorsViewModel();
                 model.EventName = @event.Name;
                 model.Visitors = new List<VisitorViewModel>();
                 var query = from entry in db.EventRegistrations where entry.EventId == @event.Id select entry;
-                foreach(EventRegistration registration in query.ToList())
+                foreach (EventRegistration registration in query.ToList())
                 {
                     model.Visitors.Add(new VisitorViewModel() { Name = registration.VisitorName, Email = registration.VisitorEmail });
                 }
@@ -220,7 +267,7 @@ namespace Planeta_Online.Controllers
                         PosterPath = path
                     });
                     db.SaveChanges();
-                }              
+                }
             }
             else
             {
@@ -312,7 +359,7 @@ namespace Planeta_Online.Controllers
         }
 
         #endregion
-        
+
         #region Blog
         public ActionResult Blog()
         {
@@ -322,27 +369,27 @@ namespace Planeta_Online.Controllers
         }
         public ActionResult CreatePost()
         {
-           return View();
+            return View();
         }
 
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult CreatePost(BlogPostViewModel model)
         {
-            
-            db.Blog.Add(new BlogPost() {TimeStamp = DateTime.Now, Title = model.Title, Text= model.Text });
+
+            db.Blog.Add(new BlogPost() { TimeStamp = DateTime.Now, Title = model.Title, Text = model.Text });
             db.Blog.OrderByDescending(elem => elem.TimeStamp);
             try
             { db.SaveChanges(); }
             catch (DbEntityValidationException e)
             {
-                return View(new BlogPost() { Title=e.Message });
+                return View(new BlogPost() { Title = e.Message });
             }
             return RedirectToAction("Blog");
         }
         public ActionResult EditPost(int? id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -375,5 +422,5 @@ namespace Planeta_Online.Controllers
             return RedirectToAction("Books");
         }
         #endregion
-   }
+    }
 }

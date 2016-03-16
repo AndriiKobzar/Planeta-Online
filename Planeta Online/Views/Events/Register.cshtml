@@ -4,46 +4,45 @@
 }
 @Html.Partial("_EventPartial")
 <h2>Зареєструватись на @Html.DisplayFor(m => m.EventName)</h2>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.EventId)
-    
-    <table class="form-horizontal">
-        <tr>
-            <td width="60%">
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.VisitorName, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.VisitorName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.VisitorName, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+<div class="col-md-6" style="margin-top:30px">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.EventId)
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.VisitorEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.VisitorEmail, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.VisitorEmail, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.VisitorName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.VisitorName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.VisitorName, "", new { @class = "text-danger" })
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Зареєструватись" class="btn btn-block" />
-                    </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.VisitorEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.VisitorEmail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.VisitorEmail, "", new { @class = "text-danger" })
                 </div>
-            </td>
-            <td>
-                <img src="@Model.PosterPath" alt="@Model.EventName" width="300" height="400" />
-            </td>
-        </tr>
-    </table>     
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Зареєструватись" class="btn btn-block" />
+            </div>
+        </div>
 
-        
 
-}
+
+    }
+</div>
+<div class="col-md-6">
+    <img src="@Model.PosterPath" alt="@Model.EventName" width="300" height="400" />
+
+</div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

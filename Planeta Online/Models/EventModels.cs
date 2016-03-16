@@ -74,7 +74,7 @@ namespace Planeta_Online.Models
     public class EventRegistrationViewModel
     {
         [Required(ErrorMessage = "Це поле необхідне")]
-        [Display(Name = "Ім'я та прізвище")]
+        [Display(Name = "Як до тебе звертатись")]
         public string VisitorName { get; set; }
 
         [Required(ErrorMessage = "Це поле необхідне")]
