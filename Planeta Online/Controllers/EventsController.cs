@@ -9,21 +9,52 @@ namespace Planeta_Online.Controllers
 {
     public class EventsController : Controller
     {
-        ApplicationDbContext db = new ApplicationDbContext(); 
+        ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            var posters = from events 
-                          in db.Events
-                          where events.PosterPath != null //&& events.Till > DateTime.Now
-                          orderby events.From descending
-                          select events;             
-            return View(posters.ToList());
+            var posters = (from events
+                           in db.Events
+                           where events.PosterPath != null //&& events.Till > DateTime.Now
+                           orderby events.Till descending
+                           select events).ToList();
+            if (posters.Count == 0)
+                return View(posters);
+            //if there are posters, sort them appropriately
+            //if all events are on one side from DateTime.Now, now need to sort them
+            var numberOnOneSide = (from poster
+                                   in posters
+                                   where poster.Till > DateTime.Now
+                                   select poster).ToList().Count;
+            if (numberOnOneSide == 0 || numberOnOneSide == posters.Count)
+                return View(posters);
+            //if there are events on both sides, apply our strange algorythm
+            //find event, which has the biggest date
+            var maxDate = (from poster
+                           in posters
+                           orderby poster.Till descending
+                           select poster).ToList()[0];
+            posters.Sort((e1, e2) =>
+            {
+                return CompareValueForEvent(e1, maxDate).CompareTo(CompareValueForEvent(e2, maxDate));
+            });
+            return View(posters);
+        }
+        private int CompareValueForEvent(Event e, Event maxDate)
+        {
+            if (e.Till > DateTime.Now)
+            {
+                return (e.Till - DateTime.Now).Days;
+            }
+            else
+            {
+                return (DateTime.Now - e.Till).Days + CompareValueForEvent(maxDate, maxDate);
+            }
         }
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
             Event @event = db.Events.Find(id);
             if (@event == null)
@@ -56,16 +87,16 @@ namespace Planeta_Online.Controllers
                 Description = @event.Description,
                 Attachments = @event.Attachment
             };
-            if(newEvent.From<DateTime.Now)
+            if (newEvent.From < DateTime.Now)
             {
                 ModelState.AddModelError(string.Empty, "Дата початку події має бути такою, яка ще не наступила.");
             }
 
-            if(newEvent.From >= newEvent.Till)
+            if (newEvent.From >= newEvent.Till)
             {
                 ModelState.AddModelError(string.Empty, "Дата та час початку події мають бути раніше, ніж дата та час кінця події.");
             }
-            
+
             foreach (Event e in db.Events)
             {
                 if (GetIntersection(newEvent.From, newEvent.Till, e.From, e.Till) != TimeSpan.Zero)
@@ -85,15 +116,19 @@ namespace Planeta_Online.Controllers
         public ActionResult Register(int id)
         {
             var _event = db.Events.Find(id);
-            EventRegistrationViewModel model = new EventRegistrationViewModel() { EventName = _event.Name, EventId = id, PosterPath = _event.PosterPath};
+            if (_event == null)
+                return HttpNotFound();
+            if (_event.Till < DateTime.Now)
+                return View("NoRegistration");
+            EventRegistrationViewModel model = new EventRegistrationViewModel() { EventName = _event.Name, EventId = id, PosterPath = _event.PosterPath };
             return View(model);
         }
         [HttpPost]
         public ActionResult Register(EventRegistrationViewModel model)
         {
-            var probableVisitor = from visitor 
+            var probableVisitor = from visitor
                                   in db.EventRegistrations
-                                  where visitor.EventId==model.EventId && visitor.VisitorEmail == model.VisitorEmail
+                                  where visitor.EventId == model.EventId && visitor.VisitorEmail == model.VisitorEmail
                                   select visitor;
             if (probableVisitor.Count() == 0)
             {
@@ -126,7 +161,7 @@ namespace Planeta_Online.Controllers
         private List<JSONEvent> GetEvents()
         {
             List<JSONEvent> eventList = new List<JSONEvent>();
-            foreach(Event _event in db.Events)
+            foreach (Event _event in db.Events)
             {
                 eventList.Add(new JSONEvent()
                 {
@@ -134,7 +169,7 @@ namespace Planeta_Online.Controllers
                     title = _event.Name,
                     start = _event.From.ToString("s"),
                     end = _event.Till.ToString("s"),
-                    url = Url.Action("Details","Events",new{id=_event.Id.ToString()})
+                    url = Url.Action("Details", "Events", new { id = _event.Id.ToString() })
                 });
             }
             return eventList;
@@ -168,6 +203,6 @@ namespace Planeta_Online.Controllers
             if (intervalStart < mainStart) tempStart = mainStart;
             if (intervalEnd > mainEnd) tempEnd = mainEnd;
             return tempEnd - tempStart;
-        } 
+        }
     }
 }

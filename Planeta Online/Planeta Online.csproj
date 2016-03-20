@@ -638,6 +638,7 @@
     <Content Include="Views\Administrator\DeletePost.cshtml" />
     <Content Include="Views\Administrator\CreatePost.cshtml" />
     <Content Include="Views\Administrator\EmailDelivery.cshtml" />
+    <Content Include="Views\Events\NoRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
