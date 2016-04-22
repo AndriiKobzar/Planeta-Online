@@ -33,8 +33,8 @@
     </dl>
 </div>
 <p>
-    @if (Model.From > DateTime.Now)
-    {
-        Html.ActionLink("Зареєструватися", "Register", new { id = Model.Id }, new { @class = "btn btn-default" });
-    }
+    @*@if (Model.From.CompareTo(DateTime.Now)>-1)
+    {*@
+        @Html.ActionLink("Зареєструватися", "Register", new { id = Model.Id }, new { @class = "btn btn-default" })
+    @*}*@
 </p>

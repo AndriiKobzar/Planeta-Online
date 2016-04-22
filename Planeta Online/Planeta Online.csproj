@@ -217,10 +217,12 @@
     <Compile Include="Models\BlogPost.cs" />
     <Compile Include="Models\BookModels.cs" />
     <Compile Include="Models\Calendar.cs" />
+    <Compile Include="Models\EmailAllModel.cs" />
     <Compile Include="Models\EmailDeliveryModel.cs" />
     <Compile Include="Models\EventModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\TestMailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -639,6 +641,8 @@
     <Content Include="Views\Administrator\CreatePost.cshtml" />
     <Content Include="Views\Administrator\EmailDelivery.cshtml" />
     <Content Include="Views\Events\NoRegistration.cshtml" />
+    <Content Include="Views\Administrator\EmailAll.cshtml" />
+    <Content Include="Views\Administrator\TestMail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

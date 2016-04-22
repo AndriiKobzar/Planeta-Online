@@ -28,28 +28,37 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @item.From.ToString("dd.MM.yyyy H:mm")
-        </td>
-        <td>
-            @item.Till.ToString("dd.MM.yyyy H:mm")
-        </td>
-        <td>
-            @Html.ActionLink(item.Visitors.ToString(), "Visitors", new { id = item.Id })
-        </td>
-        <td>
-            @Html.ActionLink("Додати до афіші", "GoToFilePicker", new { id = item.Id, type=PosterCandidateType.Event  })|
-            @Html.ActionLink("Розсилка", "EmailDelivery", new { id = item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @item.From.ToString("dd.MM.yyyy H:mm")
+            </td>
+            <td>
+                @item.Till.ToString("dd.MM.yyyy H:mm")
+            </td>
+            <td>
+                @Html.ActionLink(item.Visitors.ToString(), "Visitors", new { id = item.Id })
+            </td>
+            <td>
+                @if (item.PosterPath == null)
+                {
+                    Html.ActionLink("Додати до афіші", "GoToFilePicker", new { id = item.Id, type = PosterCandidateType.Event });
+                }
+                else 
+                {
+                    Html.ActionLink("Прибрати з афіші", "RemovePoster", new { id = item.Id});
+                }
+                |
+                @Html.ActionLink("Розсилка", "EmailDelivery", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

@@ -110,7 +110,7 @@ namespace Planeta_Online.Controllers
                                 where visitors.EventId == model.EventId
                                 select visitors).ToList();
             foreach (var visitor in visitorslist)
-            {           
+            {     
                 try
                 {
                     string from = "planeta.workspace@gmail.com";
@@ -120,22 +120,9 @@ namespace Planeta_Online.Controllers
                         message.Subject = model.Head;
                         message.Body = model.Body.Replace("<ім'я>", visitor.VisitorName);
                         message.Destination = visitor.VisitorEmail;
-                        
-                        mail.IsBodyHtml = true;
-                        mail.Body = message.Body;
-                        mail.Subject = message.Subject;
-                        SmtpClient smtp = new SmtpClient();
-                        smtp.Host = "smtp.gmail.com";
-                        smtp.EnableSsl = true;
-                        smtp.Port = 587;
-                        smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                        smtp.UseDefaultCredentials = false;
-                        NetworkCredential networkCredential = new NetworkCredential("planeta.workspace@gmail.com", "planetahub");
-                        smtp.Credentials = networkCredential;
-                        smtp.Send(mail);
-                        //EmailService service = new EmailService();
-                        //service.SendAsync(message);
-                        
+
+                        EmailService service = new EmailService();
+                        service.SendAsync(message);                
                     }
                 }
                 catch(Exception e)
@@ -228,6 +215,15 @@ namespace Planeta_Online.Controllers
             else if (model.Type == PosterCandidateType.Event && db.Events.Find(model.Id) != null) return View("AddPoster", model);
             else return new HttpNotFoundResult();
         }
+        public ActionResult RemovePoster(int id)
+        {
+            var _event = db.Events.Find(id);
+            if (_event == null)
+                return HttpNotFound();
+            db.Events.Find(id).PosterPath = null;
+            db.SaveChanges();
+            return RedirectToAction("Events");
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddPoster(PosterModel model, HttpPostedFileBase fileUpload)
@@ -288,6 +284,38 @@ namespace Planeta_Online.Controllers
                 entry.PosterPath = path;
                 db.Entry(entry).State = EntityState.Modified;
                 db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult EmailAll()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EmailAll(EmailAllModel model)
+        {
+            var query = (from email in db.EventRegistrations select email.VisitorEmail).Distinct().ToList();
+            foreach (var visitor in query)
+            {         
+                try
+                {
+                    string from = "planeta.workspace@gmail.com";
+                    using (MailMessage mail = new MailMessage(from, visitor))
+                    {
+                        IdentityMessage message = new IdentityMessage();
+                        message.Subject = model.Head;
+                        message.Body = model.Body;
+                        message.Destination = visitor;
+                        EmailService service = new EmailService();
+                        service.SendAsync(message);
+                    }
+                }
+                catch (Exception e)
+                {
+
+                }
             }
             return RedirectToAction("Index");
         }
@@ -422,5 +450,33 @@ namespace Planeta_Online.Controllers
             return RedirectToAction("Books");
         }
         #endregion
+
+        public ActionResult TestMail()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TestMail(TestMailModel model)
+        {
+            try
+            {
+                string from = "planeta.workspace@gmail.com";
+                using (MailMessage mail = new MailMessage(from, model.Email))
+                {
+                    IdentityMessage message = new IdentityMessage();
+                    message.Subject = model.Head;
+                    message.Body = model.Body.Replace("<ім'я>", "TestName");
+                    message.Destination = model.Email;
+                    EmailService service = new EmailService();
+                    service.SendAsync(message);
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

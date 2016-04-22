@@ -63,6 +63,7 @@ namespace Planeta_Online.Models
         [DataType(DataType.DateTime)]
         [Required]
         public DateTime Till { get; set; }
+        public string PosterPath { get; set; }
     }
     public class EventRegistration
     {
